@@ -1,0 +1,27 @@
+resources:
+  jobs:
+    shopflow_dbt_job:
+      name: shopflow_dbt_job
+      tasks:
+        - task_key: run_dbt_job
+          dbt_task:
+            project_directory: ${workspace.root_path}/files/
+            commands:
+              - dbt deps
+              - dbt seed
+              - dbt snapshot
+              - dbt run
+              - dbt test
+            warehouse_id: ${var.warehouse_id}
+            catalog:  ${var.catalog}
+            source: WORKSPACE
+          environment_key: dbt-default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: dbt-default
+          spec:
+            dependencies:
+              - dbt-databricks>=1.0.0,<2.0.0
+            environment_version: "4"
+      performance_target: PERFORMANCE_OPTIMIZED

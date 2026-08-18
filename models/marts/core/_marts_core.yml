@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Fact table: one row per order (incremental). Use for order-level metrics (revenue, AOV)."
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('scd_customers')
+                field: customer_id
+      - name: order_date
+        tests: [not_null]
+      - name: revenue
+        tests: [not_null]
+      - name: status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['delivered', 'shipped', 'processing', 'returned', 'cancelled']
+
+  - name: fct_order_items
+    description: "Fact table: one row per order line (incremental). Product-level revenue and quantity."
+    columns:
+      - name: order_item_id
+        tests: [unique, not_null]
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_id
+      - name: revenue
+        tests: [not_null]
+
+  - name: dim_products
+    description: "Dimension table: one row per product."
+    columns:
+      - name: product_id
+        tests: [unique, not_null]
+      - name: category
+        tests: [not_null]

@@ -1,0 +1,76 @@
+name: 'shopflow_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'shopflow_analytics'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+on-run-start:
+  - "{{ log('Starting shopflow_analytics run', info=True) }}"
+on-run-end:
+  - "{{ log('Finished shopflow_analytics run', info=True) }}"
+
+vars:
+  project_schema: "shopflow"
+
+models:
+  shopflow_analytics:
+    staging:
+      +materialized: view
+      +schema: silver
+    intermediate:
+      +materialized: view
+      +schema: silver
+    marts:
+      +materialized: table
+      +schema: gold
+      core:
+        +materialized: table
+        +schema: gold
+
+snapshots:
+  shopflow_analytics:
+    +schema: gold
+
+seeds:
+  shopflow_analytics:
+    +schema: bronze
+    raw_customers:
+      +column_types:
+        customer_id: string
+        first_name: string
+        last_name: string
+        email: string
+        country: string
+        created_at: timestamp
+    raw_orders:
+      +column_types:
+        order_id: string
+        customer_id: string
+        order_date: date
+        status: string
+        total_amount: double
+    raw_order_items:
+      +column_types:
+        order_item_id: string
+        order_id: string
+        product_id: string
+        quantity: int
+        unit_price: double
+    raw_products:
+      +column_types:
+        product_id: string
+        product_name: string
+        category: string
+        price: double

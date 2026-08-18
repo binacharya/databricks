@@ -1,0 +1,39 @@
+bundle:
+  name: shopflow-dbt
+
+variables:
+  warehouse_id:
+    description: SQL warehouse ID for the dbt task (overridden per target)
+    default: "6f9ea3149e2abcf0"
+  warehouse_id_dev:
+    description: SQL warehouse ID for dev target
+    default: "6f9ea3149e2abcf0"
+  warehouse_id_prod:
+    description: SQL warehouse ID for prod target
+    default: "6f9ea3149e2abcf0"
+  catalog:
+    description: Unity catalog name for dbt
+    default: workspace
+
+include:
+  - resources/dbt_shopflow_job.yml
+
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      warehouse_id: ${var.warehouse_id_dev}
+      catalog: workspace
+
+  prod:
+    mode: production
+    default: false
+    workspace:
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      warehouse_id: ${var.warehouse_id_prod}
+      catalog: workspace

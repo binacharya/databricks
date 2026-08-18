@@ -1,0 +1,16 @@
+version: 2
+
+snapshots:
+  - name: scd_customers
+    description: "Type 2 SCD: customer history. New row when first_name, last_name, email, or country changes. Use dbt_valid_from / dbt_valid_to for point-in-time queries."
+    columns:
+      - name: customer_id
+        description: "Business key for the customer"
+      - name: dbt_valid_from
+        description: "When this version of the row became valid"
+      - name: dbt_valid_to
+        description: "When this version was superseded (null = current)"
+      - name: dbt_scd_id
+        description: "Unique key for the snapshot row"
+      - name: dbt_updated_at
+        description: "When the snapshot run last updated this row"
