@@ -65,16 +65,17 @@ jobs:
             exit 0
           fi
 
-          CHANGED=$(git diff --name-only "$BEFORE" "$AFTER" -- models | grep '\.sql$' || true)
+          CHANGED_MODELS=$(git diff --name-only "$BEFORE" "$AFTER" -- models | grep '\.sql$' || true)
+          CHANGED_SEEDS=$(git diff --name-only "$BEFORE" "$AFTER" -- seeds | grep '\.csv$' || true)
 
-          if [ -z "$CHANGED" ]; then
+          if [ -z "$CHANGED_MODELS" ] && [ -z "$CHANGED_SEEDS" ]; then
             echo "select=fqn:*" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           SELECT=""
-          for f in $CHANGED; do
-            name=$(basename "$f" .sql)
+          for f in $CHANGED_MODELS $CHANGED_SEEDS; do
+            name=$(basename "$f" | sed -E 's/\.(sql|csv)$//')
             SELECT="$SELECT ${name}+"
           done
 
