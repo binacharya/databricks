@@ -1,8 +1,8 @@
-name: 'shopflow_analytics'
+name: 'analytics'
 version: '1.0.0'
 config-version: 2
 
-profile: 'shopflow_analytics'
+profile: 'analytics'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -17,15 +17,15 @@ clean-targets:
   - "dbt_packages"
 
 on-run-start:
-  - "{{ log('Starting shopflow_analytics run', info=True) }}"
+  - "{{ log('Starting analytics run', info=True) }}"
 on-run-end:
-  - "{{ log('Finished shopflow_analytics run', info=True) }}"
+  - "{{ log('Finished analytics run', info=True) }}"
 
 vars:
   project_schema: "shopflow"
 
 models:
-  shopflow_analytics:
+  analytics:
     staging:
       +materialized: view
       +schema: silver
@@ -40,11 +40,11 @@ models:
         +schema: gold
 
 snapshots:
-  shopflow_analytics:
+  analytics:
     +schema: gold
 
 seeds:
-  shopflow_analytics:
+  analytics:
     +schema: bronze
     # raw_customers:
     #   +column_types:
