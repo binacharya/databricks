@@ -10,7 +10,7 @@ resources:
               - dbt deps
               - dbt seed
               - dbt snapshot
-              - dbt debug
+              - dbt build
             warehouse_id: ${var.warehouse_id}
             catalog:  ${var.catalog}
             source: WORKSPACE
