@@ -1,5 +1,5 @@
 bundle:
-  name: shopflow-dbt
+  name: DBT automation job from code
 
 variables:
   warehouse_id:

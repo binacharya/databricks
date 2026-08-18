@@ -23,7 +23,23 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: Validate bundle
-        run: databricks bundle validate -t dev
+        run: |
+          n=0
+          until [ $n -ge 3 ]; do
+            databricks bundle validate -t dev && exit 0
+            n=$((n+1))
+            echo "Attempt $n failed, retrying in 10s..."
+            sleep 10
+          done
+          exit 1
 
       - name: Deploy bundle (dev)
-        run: databricks bundle deploy -t dev
+        run: |
+          n=0
+          until [ $n -ge 3 ]; do
+            databricks bundle deploy -t dev && exit 0
+            n=$((n+1))
+            echo "Attempt $n failed, retrying in 10s..."
+            sleep 10
+          done
+          exit 1
