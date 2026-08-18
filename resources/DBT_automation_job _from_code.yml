@@ -18,7 +18,7 @@ resources:
             warehouse_id: ${var.warehouse_id}
             catalog:  ${var.catalog}
             source: WORKSPACE
-            email_notifications:
+          email_notifications:
             on_success:
               - acharyabina01@gmail.com
             on_failure:
