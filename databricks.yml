@@ -24,7 +24,7 @@ targets:
     mode: development
     default: true
     workspace:
-      root_path: /Workspace/Users/acharyabina01@gmail.com/databricks
+      root_path: /Workspace/Users/acharyabina01@gmail.com
     variables:
       warehouse_id: ${var.warehouse_id_dev}
       catalog: workspace
@@ -33,7 +33,7 @@ targets:
     mode: production
     default: false
     workspace:
-      root_path: /Workspace/Users/acharyabina01@gmail.com/databricks
+      root_path: /Workspace/Users/acharyabina01@gmail.com
     variables:
       warehouse_id: ${var.warehouse_id_prod}
       catalog: workspace
