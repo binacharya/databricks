@@ -1,9 +1,13 @@
 resources:
   jobs:
-    shopflow_dbt_job:
-      name: shopflow_dbt_job
+    dbt_databricks_job:
+      name: "DBT automation job from code"
+      schedule:
+        quartz_cron_expression: 44 6 15 * * ?
+        timezone_id: Asia/Katmandu
+        pause_status: UNPAUSED
       tasks:
-        - task_key: run_dbt_job
+        - task_key: dbt_pipeline_run
           dbt_task:
             project_directory: ${workspace.root_path}/files/
             commands:
@@ -15,6 +19,11 @@ resources:
             warehouse_id: ${var.warehouse_id}
             catalog:  ${var.catalog}
             source: WORKSPACE
+            email_notifications:
+            on_success:
+              - acharyabina01@gmail.com
+            on_failure:
+              - acharyabina01@gmail.com
           environment_key: dbt-default
       queue:
         enabled: true

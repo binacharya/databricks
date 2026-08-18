@@ -1,0 +1,301 @@
+product_id,sku,product_name,category,subcategory,brand,color,size,unit_cost,list_price,supplier_country,launch_date,discontinued_date,is_active
+P0001,HOM-BE-0001,Verdant Trail Vase,Home & Kitchen,Bedding,Verdant,Black,One Size,11.66,20.99,China,2022-05-25,,True
+P0002,GRO-HO-0002,Fjord Core Pasta,Grocery,Household,Fjord,N/A,One Size,2.59,3.67,China,2025-07-14,,True
+P0003,GRO-BE-0003,Kestrel Core Olive Oil,Grocery,Beverages,Kestrel,N/A,One Size,6.74,8.99,China,2023-06-12,,True
+P0004,ELE-AU-0004,Verdant Studio Hub,Electronics,Audio,Verdant,N/A,One Size,37.77,54.99,USA,2023-07-07,,True
+P0005,APP-KI-0005,Vertex Deluxe Tee,Apparel,Kids,Vertex,Burgundy,L,44.57,101.99,Turkey,2023-06-04,,True
+P0006,APP-BO-0006,Halcyon Heritage Jacket,Apparel,Bottoms,Halcyon,Sand,XL,23.51,55.99,India,2023-03-03,,True
+P0007,ELE-SM-0007,Lumina Essential Mouse,Electronics,Smart Home,Lumina,N/A,One Size,405.36,517.99,Vietnam,2022-07-24,,True
+P0008,HOM-BE-0008,Ridgeline Signature Storage Set,Home & Kitchen,Bedding,Ridgeline,Burgundy,One Size,19.95,38.99,Mexico,2024-12-05,,True
+P0009,ELE-CO-0009,Nimbus Premium Mouse,Electronics,Computing,Nimbus,N/A,One Size,72.86,95.99,Turkey,2022-11-14,,True
+P0010,APP-WO-0010,Kestrel Signature Chinos,Apparel,Women's Tops,Kestrel,Charcoal,XL,40.38,79.99,USA,2022-05-07,,True
+P0011,APP-BO-0011,Fjord Core Hoodie,Apparel,Bottoms,Fjord,Olive,XXL,10.45,20.99,Vietnam,2023-06-18,,True
+P0012,ELE-WE-0012,Kestrel Studio Headphones,Electronics,Wearables,Kestrel,N/A,One Size,179.84,222.99,Portugal,2023-02-23,2024-01-14,False
+P0013,APP-OU-0013,Aurora Premium Shirt,Apparel,Outerwear,Aurora,Sand,S,7.85,19.99,Vietnam,2022-02-23,,True
+P0014,ELE-CO-0014,Ridgeline Classic Earbuds,Electronics,Computing,Ridgeline,N/A,One Size,83.78,112.99,Bangladesh,2023-07-01,,True
+P0015,FOO-SA-0015,Solace Deluxe Boot,Footwear,Sandals,Solace,Charcoal,US 6,14.44,31.99,Mexico,2026-02-01,,True
+P0016,BEA-FR-0016,Nimbus Compact Shampoo,Beauty & Personal Care,Fragrance,Nimbus,N/A,One Size,42.67,93.99,Turkey,2024-11-20,,True
+P0017,SPO-TE-0017,Kestrel Premium Jump Rope,Sports & Outdoors,Team Sports,Kestrel,N/A,One Size,22.31,37.99,India,2022-05-10,,True
+P0018,ELE-SM-0018,Nimbus Premium Charger,Electronics,Smart Home,Nimbus,N/A,One Size,226.95,334.99,Bangladesh,2024-01-13,,True
+P0019,HOM-BE-0019,Basecamp Core Skillet,Home & Kitchen,Bedding,Basecamp,Grey,One Size,78.69,129.99,Vietnam,2024-07-28,,True
+P0020,APP-KI-0020,Basecamp Studio Sweater,Apparel,Kids,Basecamp,Olive,L,10.44,20.99,Portugal,2022-06-06,,True
+P0021,APP-ME-0021,Lumina Everyday Tee,Apparel,Men's Tops,Lumina,White,S,7.88,16.99,USA,2022-12-01,,True
+P0022,BEA-CO-0022,Verdant Everyday Eau de Parfum,Beauty & Personal Care,Cosmetics,Verdant,N/A,One Size,40.78,96.99,Turkey,2024-04-12,,True
+P0023,FOO-SA-0023,Nimbus Core Boot,Footwear,Sandals,Nimbus,Navy,US 6,44.21,90.99,Bangladesh,2025-10-24,,True
+P0024,GRO-PA-0024,Verdant Urban Sparkling Water,Grocery,Pantry,Verdant,N/A,One Size,18.64,23.99,Vietnam,2022-12-13,,True
+P0025,HOM-DE-0025,Mercato Signature Cutting Board,Home & Kitchen,Decor,Mercato,White,One Size,45.22,77.99,Bangladesh,2024-04-16,,True
+P0026,APP-KI-0026,Lumina Essential Polo,Apparel,Kids,Lumina,Sand,S,58.53,109.99,USA,2025-06-02,,True
+P0027,APP-KI-0027,Copperleaf Studio Hoodie,Apparel,Kids,Copperleaf,Navy,XL,13.62,25.99,Vietnam,2024-11-05,2025-10-07,False
+P0028,BEA-CO-0028,Basecamp Deluxe Shampoo,Beauty & Personal Care,Cosmetics,Basecamp,N/A,One Size,9.1,27.99,Bangladesh,2026-01-06,,True
+P0029,HOM-ST-0029,Nimbus Lite Duvet,Home & Kitchen,Storage,Nimbus,White,One Size,19.63,34.99,Bangladesh,2024-10-24,,True
+P0030,SPO-TE-0030,Copperleaf Essential Jump Rope,Sports & Outdoors,Team Sports,Copperleaf,N/A,One Size,111.17,205.99,Mexico,2023-01-14,,True
+P0031,HOM-SM-0031,Copperleaf Deluxe Vase,Home & Kitchen,Small Appliances,Copperleaf,Navy,One Size,19.48,35.99,Portugal,2025-02-01,,True
+P0032,ELE-CO-0032,Basecamp Compact Keyboard,Electronics,Computing,Basecamp,N/A,One Size,51.84,72.99,India,2024-01-03,,True
+P0033,FOO-BO-0033,Solace Signature Hiker,Footwear,Boots,Solace,Olive,US 7,50.52,110.99,Mexico,2023-03-23,,True
+P0034,BEA-FR-0034,Copperleaf Core Serum,Beauty & Personal Care,Fragrance,Copperleaf,N/A,One Size,18.27,37.99,Mexico,2025-10-25,,True
+P0035,SPO-FI-0035,Basecamp Studio Bottle,Sports & Outdoors,Fitness,Basecamp,N/A,One Size,102.96,201.99,Vietnam,2022-08-28,,True
+P0036,HOM-CO-0036,Northwind Studio Vase,Home & Kitchen,Cookware,Northwind,Charcoal,One Size,30.68,58.99,Turkey,2023-06-09,,True
+P0037,APP-OU-0037,Aurora Compact Tee,Apparel,Outerwear,Aurora,Burgundy,XL,34.47,71.99,Bangladesh,2022-04-25,,True
+P0038,FOO-FO-0038,Basecamp Trail Trainer,Footwear,Formal,Basecamp,Grey,US 6,24.08,41.99,Mexico,2024-05-16,,True
+P0039,GRO-BE-0039,Ridgeline Studio Sparkling Water,Grocery,Beverages,Ridgeline,N/A,One Size,4.35,6.99,Mexico,2024-07-28,,True
+P0040,HOM-CO-0040,Aurora Urban Blender,Home & Kitchen,Cookware,Aurora,Olive,One Size,68.02,104.99,Bangladesh,2024-05-07,,True
+P0041,FOO-BO-0041,Solace Core Loafer,Footwear,Boots,Solace,Teal,US 11,15.98,37.99,Vietnam,2022-08-29,,True
+P0042,APP-ME-0042,Halcyon Core Joggers,Apparel,Men's Tops,Halcyon,Black,XXL,12.61,23.99,India,2024-07-06,,True
+P0043,APP-OU-0043,Vertex Classic Joggers,Apparel,Outerwear,Vertex,Teal,XXL,54.0,105.99,Bangladesh,2023-02-03,2024-12-02,False
+P0044,BEA-CO-0044,Verdant Urban Serum,Beauty & Personal Care,Cosmetics,Verdant,N/A,One Size,5.22,10.99,Turkey,2022-11-13,,True
+P0045,APP-KI-0045,Ridgeline Classic Hoodie,Apparel,Kids,Ridgeline,Black,L,10.73,24.99,Vietnam,2023-04-19,2025-09-21,False
+P0046,BEA-SK-0046,Basecamp Premium Shampoo,Beauty & Personal Care,Skincare,Basecamp,N/A,One Size,3.34,10.99,India,2024-05-11,,True
+P0047,APP-OU-0047,Lumina Signature Shirt,Apparel,Outerwear,Lumina,Navy,XS,25.0,57.99,Portugal,2023-11-04,,True
+P0048,ELE-CO-0048,Aurora Everyday Monitor,Electronics,Computing,Aurora,N/A,One Size,37.01,47.99,Portugal,2024-04-03,,True
+P0049,ELE-WE-0049,Verdant Essential Monitor,Electronics,Wearables,Verdant,N/A,One Size,45.59,55.99,China,2023-02-19,,True
+P0050,HOM-ST-0050,Mercato Heritage Blender,Home & Kitchen,Storage,Mercato,Navy,One Size,55.44,92.99,Portugal,2022-12-27,,True
+P0051,ELE-SM-0051,Solace Deluxe Hub,Electronics,Smart Home,Solace,N/A,One Size,399.54,593.99,Turkey,2022-06-28,,True
+P0052,SPO-CA-0052,Fjord Classic Yoga Mat,Sports & Outdoors,Camping,Fjord,N/A,One Size,9.51,17.99,Vietnam,2022-07-24,,True
+P0053,FOO-SN-0053,Ridgeline Core Runner,Footwear,Sneakers,Ridgeline,Burgundy,US 6,69.54,155.99,Turkey,2025-04-03,,True
+P0054,GRO-BE-0054,Fjord Compact Olive Oil,Grocery,Beverages,Fjord,N/A,One Size,12.0,17.99,India,2023-10-27,,True
+P0055,HOM-CO-0055,Fjord Premium Storage Set,Home & Kitchen,Cookware,Fjord,Teal,One Size,86.25,178.99,Bangladesh,2024-03-05,,True
+P0056,ELE-SM-0056,Basecamp Pro Earbuds,Electronics,Smart Home,Basecamp,N/A,One Size,258.95,344.99,China,2025-05-30,,True
+P0057,APP-KI-0057,Vertex Pro Hoodie,Apparel,Kids,Vertex,Charcoal,XXL,27.5,58.99,Mexico,2025-02-02,,True
+P0058,BEA-CO-0058,Ridgeline Studio Serum,Beauty & Personal Care,Cosmetics,Ridgeline,N/A,One Size,7.05,17.99,India,2022-05-31,,True
+P0059,SPO-CA-0059,Solace Urban Jump Rope,Sports & Outdoors,Camping,Solace,N/A,One Size,53.22,100.99,India,2023-08-22,,True
+P0060,ELE-SM-0060,Copperleaf Studio Speaker,Electronics,Smart Home,Copperleaf,N/A,One Size,24.5,31.99,Mexico,2024-12-20,,True
+P0061,HOM-BE-0061,Solace Classic Vase,Home & Kitchen,Bedding,Solace,Teal,One Size,60.19,110.99,Portugal,2023-11-25,,True
+P0062,SPO-CY-0062,Ridgeline Essential Jump Rope,Sports & Outdoors,Cycling,Ridgeline,N/A,One Size,101.12,192.99,Vietnam,2024-05-27,,True
+P0063,HOM-BE-0063,Nimbus Everyday Lamp,Home & Kitchen,Bedding,Nimbus,Burgundy,One Size,13.65,25.99,India,2022-03-12,,True
+P0064,ELE-AU-0064,Copperleaf Signature Charger,Electronics,Audio,Copperleaf,N/A,One Size,653.84,866.99,Turkey,2023-06-10,2024-05-30,False
+P0065,GRO-BE-0065,Verdant Essential Coffee Beans,Grocery,Beverages,Verdant,N/A,One Size,5.4,6.99,Vietnam,2023-09-04,,True
+P0066,SPO-CY-0066,Ridgeline Lite Backpack,Sports & Outdoors,Cycling,Ridgeline,N/A,One Size,10.84,16.99,Bangladesh,2024-05-02,2026-01-27,False
+P0067,APP-BO-0067,Ridgeline Lite Sweater,Apparel,Bottoms,Ridgeline,Teal,XXL,37.71,73.99,Bangladesh,2022-05-18,,True
+P0068,ELE-MO-0068,Aurora Essential Smartwatch,Electronics,Mobile Accessories,Aurora,N/A,One Size,26.6,32.99,Portugal,2022-05-27,,True
+P0069,FOO-FO-0069,Ridgeline Lite Slide,Footwear,Formal,Ridgeline,Black,US 8,39.94,94.99,Portugal,2024-03-31,,True
+P0070,APP-KI-0070,Aurora Lite Tee,Apparel,Kids,Aurora,Teal,M,11.48,20.99,Portugal,2024-06-02,,True
+P0071,BEA-HA-0071,Solace Trail Mask,Beauty & Personal Care,Haircare,Solace,N/A,One Size,40.31,88.99,India,2023-11-19,,True
+P0072,HOM-BE-0072,Mercato Heritage Skillet,Home & Kitchen,Bedding,Mercato,Teal,One Size,13.09,21.99,Vietnam,2025-03-20,,True
+P0073,BEA-FR-0073,Mercato Urban Mask,Beauty & Personal Care,Fragrance,Mercato,N/A,One Size,43.44,118.99,India,2023-05-31,,True
+P0074,HOM-DE-0074,Kestrel Everyday Vase,Home & Kitchen,Decor,Kestrel,Grey,One Size,153.65,272.99,Mexico,2022-12-23,2025-04-27,False
+P0075,APP-ME-0075,Mercato Classic Polo,Apparel,Men's Tops,Mercato,Navy,XL,24.34,48.99,Vietnam,2026-01-07,,True
+P0076,APP-KI-0076,Kestrel Urban Jacket,Apparel,Kids,Kestrel,Black,L,20.88,37.99,India,2023-11-15,2024-08-19,False
+P0077,ELE-CO-0077,Solace Compact Mouse,Electronics,Computing,Solace,N/A,One Size,34.57,44.99,USA,2022-07-06,,True
+P0078,FOO-SA-0078,Lumina Signature Boot,Footwear,Sandals,Lumina,Black,US 6,35.86,75.99,Bangladesh,2025-08-16,,True
+P0079,APP-KI-0079,Northwind Premium Tee,Apparel,Kids,Northwind,Sand,M,33.07,64.99,Vietnam,2024-05-14,,True
+P0080,HOM-BE-0080,Vertex Core Cutting Board,Home & Kitchen,Bedding,Vertex,Grey,One Size,116.49,191.99,Bangladesh,2023-12-22,,True
+P0081,SPO-TE-0081,Vertex Pro Bottle,Sports & Outdoors,Team Sports,Vertex,N/A,One Size,67.3,104.99,USA,2022-08-13,,True
+P0082,FOO-SN-0082,Basecamp Classic Loafer,Footwear,Sneakers,Basecamp,Navy,US 12,60.48,127.99,China,2024-03-06,,True
+P0083,APP-BO-0083,Halcyon Heritage Tee,Apparel,Bottoms,Halcyon,Black,L,18.3,47.99,Turkey,2026-02-18,,True
+P0084,SPO-FI-0084,Copperleaf Lite Bottle,Sports & Outdoors,Fitness,Copperleaf,N/A,One Size,71.28,112.99,Vietnam,2022-10-22,,True
+P0085,SPO-FI-0085,Northwind Classic Bike Light,Sports & Outdoors,Fitness,Northwind,N/A,One Size,16.2,30.99,India,2022-07-08,,True
+P0086,BEA-FR-0086,Ridgeline Compact Eau de Parfum,Beauty & Personal Care,Fragrance,Ridgeline,N/A,One Size,17.89,58.99,Vietnam,2024-03-20,2025-07-26,False
+P0087,ELE-WE-0087,Nimbus Everyday Hub,Electronics,Wearables,Nimbus,N/A,One Size,55.43,77.99,Bangladesh,2025-03-27,,True
+P0088,SPO-TE-0088,Copperleaf Essential Dumbbell Set,Sports & Outdoors,Team Sports,Copperleaf,N/A,One Size,37.26,67.99,Bangladesh,2022-12-31,,True
+P0089,BEA-FR-0089,Ridgeline Signature Eau de Parfum,Beauty & Personal Care,Fragrance,Ridgeline,N/A,One Size,2.87,8.99,Vietnam,2022-11-11,2025-01-24,False
+P0090,APP-WO-0090,Vertex Signature Polo,Apparel,Women's Tops,Vertex,White,L,33.92,84.99,Turkey,2023-08-28,,True
+P0091,HOM-BE-0091,Mercato Signature Blender,Home & Kitchen,Bedding,Mercato,Charcoal,One Size,11.13,18.99,China,2023-06-08,,True
+P0092,FOO-SN-0092,Nimbus Compact Trainer,Footwear,Sneakers,Nimbus,Teal,US 12,17.18,36.99,China,2023-02-23,,True
+P0093,ELE-CO-0093,Lumina Everyday Earbuds,Electronics,Computing,Lumina,N/A,One Size,73.98,110.99,Mexico,2023-12-25,,True
+P0094,FOO-BO-0094,Ridgeline Pro Hiker,Footwear,Boots,Ridgeline,White,US 6,76.52,180.99,Bangladesh,2023-01-27,2025-07-02,False
+P0095,APP-WO-0095,Verdant Deluxe Sweater,Apparel,Women's Tops,Verdant,Black,XXL,27.66,52.99,India,2023-01-24,,True
+P0096,FOO-SA-0096,Verdant Lite Hiker,Footwear,Sandals,Verdant,White,US 6,63.15,136.99,China,2023-08-03,,True
+P0097,FOO-FO-0097,Vertex Deluxe Slide,Footwear,Formal,Vertex,Navy,US 11,35.81,68.99,Turkey,2024-02-22,,True
+P0098,HOM-SM-0098,Ridgeline Essential Duvet,Home & Kitchen,Small Appliances,Ridgeline,Charcoal,One Size,8.33,16.99,Turkey,2023-12-25,,True
+P0099,HOM-ST-0099,Solace Deluxe Vase,Home & Kitchen,Storage,Solace,Grey,One Size,9.42,14.99,China,2024-02-19,,True
+P0100,APP-ME-0100,Vertex Essential Joggers,Apparel,Men's Tops,Vertex,Black,M,6.7,16.99,Bangladesh,2024-07-05,,True
+P0101,APP-BO-0101,Verdant Signature Hoodie,Apparel,Bottoms,Verdant,Grey,L,42.32,89.99,Vietnam,2025-12-24,,True
+P0102,BEA-FR-0102,Mercato Classic Moisturizer,Beauty & Personal Care,Fragrance,Mercato,N/A,One Size,29.74,64.99,Bangladesh,2024-01-25,,True
+P0103,GRO-BE-0103,Lumina Core Coffee Beans,Grocery,Beverages,Lumina,N/A,One Size,6.83,8.99,China,2023-07-08,,True
+P0104,FOO-BO-0104,Ridgeline Compact Boot,Footwear,Boots,Ridgeline,Olive,US 9,55.11,111.99,China,2024-05-28,,True
+P0105,SPO-CY-0105,Northwind Signature Bottle,Sports & Outdoors,Cycling,Northwind,N/A,One Size,152.07,278.99,Bangladesh,2023-11-26,,True
+P0106,GRO-PA-0106,Basecamp Compact Dish Soap,Grocery,Pantry,Basecamp,N/A,One Size,5.51,7.99,Mexico,2024-03-20,,True
+P0107,HOM-BE-0107,Kestrel Heritage Vase,Home & Kitchen,Bedding,Kestrel,Black,One Size,27.65,43.99,Mexico,2022-07-19,,True
+P0108,FOO-SA-0108,Verdant Premium Runner,Footwear,Sandals,Verdant,Teal,US 7,92.78,166.99,USA,2022-09-01,,True
+P0109,BEA-SK-0109,Copperleaf Core Moisturizer,Beauty & Personal Care,Skincare,Copperleaf,N/A,One Size,11.15,30.99,Mexico,2024-02-01,,True
+P0110,FOO-BO-0110,Ridgeline Signature Slide,Footwear,Boots,Ridgeline,Grey,US 10,70.3,117.99,India,2023-08-08,,True
+P0111,SPO-CA-0111,Kestrel Pro Backpack,Sports & Outdoors,Camping,Kestrel,N/A,One Size,41.33,72.99,Portugal,2023-03-30,,True
+P0112,SPO-TE-0112,Nimbus Signature Yoga Mat,Sports & Outdoors,Team Sports,Nimbus,N/A,One Size,98.77,181.99,Mexico,2022-10-01,,True
+P0113,FOO-SN-0113,Kestrel Essential Boot,Footwear,Sneakers,Kestrel,Sand,US 7,38.12,67.99,India,2023-02-21,,True
+P0114,BEA-SK-0114,Aurora Deluxe Cleanser,Beauty & Personal Care,Skincare,Aurora,N/A,One Size,29.56,61.99,India,2024-03-30,,True
+P0115,ELE-AU-0115,Basecamp Studio Charger,Electronics,Audio,Basecamp,N/A,One Size,710.17,877.99,USA,2025-08-07,,True
+P0116,HOM-BE-0116,Aurora Heritage Cutting Board,Home & Kitchen,Bedding,Aurora,Olive,One Size,9.82,16.99,USA,2023-05-04,,True
+P0117,GRO-PA-0117,Northwind Trail Coffee Beans,Grocery,Pantry,Northwind,N/A,One Size,12.47,19.99,China,2024-05-08,,True
+P0118,BEA-HA-0118,Ridgeline Pro Shampoo,Beauty & Personal Care,Haircare,Ridgeline,N/A,One Size,24.51,72.99,China,2022-08-24,,True
+P0119,ELE-WE-0119,Lumina Core Power Bank,Electronics,Wearables,Lumina,N/A,One Size,463.46,575.99,Turkey,2025-02-25,,True
+P0120,ELE-AU-0120,Verdant Compact Earbuds,Electronics,Audio,Verdant,N/A,One Size,154.86,224.99,China,2024-09-15,,True
+P0121,HOM-BE-0121,Verdant Classic Skillet,Home & Kitchen,Bedding,Verdant,Charcoal,One Size,19.4,36.99,Turkey,2023-02-20,,True
+P0122,ELE-WE-0122,Basecamp Essential Speaker,Electronics,Wearables,Basecamp,N/A,One Size,271.52,338.99,China,2025-03-14,,True
+P0123,ELE-WE-0123,Nimbus Deluxe Headphones,Electronics,Wearables,Nimbus,N/A,One Size,169.09,225.99,Portugal,2022-04-28,,True
+P0124,APP-OU-0124,Lumina Urban Sweater,Apparel,Outerwear,Lumina,Sand,M,11.47,26.99,Mexico,2024-07-27,,True
+P0125,APP-KI-0125,Mercato Lite Jacket,Apparel,Kids,Mercato,Burgundy,XS,11.97,24.99,Portugal,2023-12-13,,True
+P0126,HOM-CO-0126,Kestrel Urban Blender,Home & Kitchen,Cookware,Kestrel,Black,One Size,64.51,100.99,USA,2023-09-10,,True
+P0127,SPO-CY-0127,Aurora Urban Backpack,Sports & Outdoors,Cycling,Aurora,N/A,One Size,216.17,322.99,Portugal,2023-05-31,,True
+P0128,APP-ME-0128,Copperleaf Everyday Jacket,Apparel,Men's Tops,Copperleaf,Teal,M,19.76,37.99,India,2025-09-12,,True
+P0129,FOO-BO-0129,Lumina Signature Slide,Footwear,Boots,Lumina,Black,US 6,20.24,45.99,Portugal,2026-02-21,,True
+P0130,SPO-CY-0130,Nimbus Compact Yoga Mat,Sports & Outdoors,Cycling,Nimbus,N/A,One Size,41.04,81.99,Portugal,2024-12-30,,True
+P0131,HOM-SM-0131,Verdant Core Kettle,Home & Kitchen,Small Appliances,Verdant,Olive,One Size,167.87,296.99,USA,2023-04-12,,True
+P0132,APP-WO-0132,Halcyon Pro Hoodie,Apparel,Women's Tops,Halcyon,Burgundy,M,6.44,15.99,Portugal,2024-02-10,,True
+P0133,GRO-BE-0133,Verdant Signature Dish Soap,Grocery,Beverages,Verdant,N/A,One Size,4.24,5.99,India,2023-08-15,,True
+P0134,FOO-SA-0134,Nimbus Pro Runner,Footwear,Sandals,Nimbus,Teal,US 7,21.09,36.99,USA,2023-08-27,,True
+P0135,APP-BO-0135,Solace Deluxe Polo,Apparel,Bottoms,Solace,Grey,XS,26.61,60.99,Bangladesh,2025-09-15,,True
+P0136,APP-OU-0136,Northwind Signature Sweater,Apparel,Outerwear,Northwind,Burgundy,S,30.54,55.99,Portugal,2023-10-04,,True
+P0137,BEA-CO-0137,Kestrel Core Mask,Beauty & Personal Care,Cosmetics,Kestrel,N/A,One Size,7.35,18.99,China,2025-02-03,,True
+P0138,GRO-BE-0138,Aurora Signature Dish Soap,Grocery,Beverages,Aurora,N/A,One Size,2.46,3.59,Vietnam,2022-06-23,,True
+P0139,ELE-AU-0139,Lumina Trail Speaker,Electronics,Audio,Lumina,N/A,One Size,140.62,186.99,China,2022-03-02,,True
+P0140,SPO-FI-0140,Northwind Essential Bike Light,Sports & Outdoors,Fitness,Northwind,N/A,One Size,177.7,262.99,Portugal,2023-11-02,,True
+P0141,HOM-DE-0141,Aurora Lite Cutting Board,Home & Kitchen,Decor,Aurora,Olive,One Size,6.28,10.99,China,2023-01-23,,True
+P0142,FOO-SN-0142,Aurora Trail Hiker,Footwear,Sneakers,Aurora,Grey,US 12,30.89,67.99,Bangladesh,2026-03-19,,True
+P0143,ELE-WE-0143,Basecamp Classic Power Bank,Electronics,Wearables,Basecamp,N/A,One Size,616.6,924.99,Mexico,2024-12-26,,True
+P0144,APP-WO-0144,Nimbus Compact Joggers,Apparel,Women's Tops,Nimbus,Black,XXL,9.17,16.99,USA,2025-12-28,,True
+P0145,ELE-CO-0145,Nimbus Classic Headphones,Electronics,Computing,Nimbus,N/A,One Size,43.43,54.99,China,2022-03-14,,True
+P0146,BEA-SK-0146,Solace Deluxe Serum,Beauty & Personal Care,Skincare,Solace,N/A,One Size,23.35,74.99,USA,2026-02-17,,True
+P0147,SPO-FI-0147,Nimbus Urban Bike Light,Sports & Outdoors,Fitness,Nimbus,N/A,One Size,42.44,70.99,Portugal,2022-06-17,,True
+P0148,APP-BO-0148,Ridgeline Compact Jacket,Apparel,Bottoms,Ridgeline,Charcoal,XXL,66.88,149.99,USA,2024-09-20,,True
+P0149,GRO-SN-0149,Copperleaf Signature Coffee Beans,Grocery,Snacks,Copperleaf,N/A,One Size,1.76,2.33,China,2024-11-25,,True
+P0150,HOM-DE-0150,Mercato Deluxe Kettle,Home & Kitchen,Decor,Mercato,Teal,One Size,85.56,156.99,Vietnam,2022-12-24,,True
+P0151,ELE-AU-0151,Mercato Signature Charger,Electronics,Audio,Mercato,N/A,One Size,269.93,367.99,China,2023-08-27,,True
+P0152,ELE-WE-0152,Verdant Essential Hub,Electronics,Wearables,Verdant,N/A,One Size,20.77,30.99,Turkey,2022-10-22,,True
+P0153,ELE-CO-0153,Nimbus Urban Power Bank,Electronics,Computing,Nimbus,N/A,One Size,84.01,112.99,Turkey,2022-02-18,2024-02-01,False
+P0154,HOM-DE-0154,Northwind Studio Lamp,Home & Kitchen,Decor,Northwind,Burgundy,One Size,24.38,48.99,Mexico,2025-06-02,,True
+P0155,ELE-CO-0155,Mercato Premium Charger,Electronics,Computing,Mercato,N/A,One Size,157.45,205.99,Mexico,2023-07-07,,True
+P0156,ELE-WE-0156,Verdant Lite Smartwatch,Electronics,Wearables,Verdant,N/A,One Size,238.11,318.99,China,2023-04-10,,True
+P0157,HOM-CO-0157,Ridgeline Essential Lamp,Home & Kitchen,Cookware,Ridgeline,White,One Size,15.14,23.99,India,2026-03-08,,True
+P0158,SPO-CY-0158,Ridgeline Premium Bike Light,Sports & Outdoors,Cycling,Ridgeline,N/A,One Size,16.0,25.99,China,2025-06-04,,True
+P0159,HOM-ST-0159,Verdant Heritage Kettle,Home & Kitchen,Storage,Verdant,Navy,One Size,26.36,50.99,Portugal,2024-05-31,,True
+P0160,APP-WO-0160,Basecamp Premium Hoodie,Apparel,Women's Tops,Basecamp,Charcoal,S,20.78,42.99,India,2022-10-24,,True
+P0161,ELE-WE-0161,Kestrel Core Keyboard,Electronics,Wearables,Kestrel,N/A,One Size,27.91,39.99,Bangladesh,2024-06-09,,True
+P0162,GRO-BE-0162,Mercato Urban Trail Mix,Grocery,Beverages,Mercato,N/A,One Size,22.21,33.99,Portugal,2025-05-25,,True
+P0163,ELE-CO-0163,Solace Compact Smartwatch,Electronics,Computing,Solace,N/A,One Size,387.65,482.99,China,2022-10-30,,True
+P0164,SPO-FI-0164,Copperleaf Premium Tent,Sports & Outdoors,Fitness,Copperleaf,N/A,One Size,34.11,53.99,Turkey,2022-07-24,,True
+P0165,FOO-SN-0165,Vertex Essential Trainer,Footwear,Sneakers,Vertex,White,US 10,14.59,33.99,China,2022-09-13,,True
+P0166,SPO-TE-0166,Lumina Core Jump Rope,Sports & Outdoors,Team Sports,Lumina,N/A,One Size,12.83,22.99,USA,2022-02-14,,True
+P0167,FOO-SN-0167,Fjord Signature Boot,Footwear,Sneakers,Fjord,Burgundy,US 11,23.01,49.99,China,2023-02-01,,True
+P0168,HOM-ST-0168,Nimbus Core Skillet,Home & Kitchen,Storage,Nimbus,White,One Size,10.67,18.99,Mexico,2025-12-13,,True
+P0169,APP-ME-0169,Vertex Trail Jacket,Apparel,Men's Tops,Vertex,Sand,XS,17.75,43.99,Portugal,2023-04-16,,True
+P0170,GRO-SN-0170,Lumina Signature Dish Soap,Grocery,Snacks,Lumina,N/A,One Size,16.04,20.99,Portugal,2023-07-26,,True
+P0171,FOO-SN-0171,Verdant Premium Hiker,Footwear,Sneakers,Verdant,Charcoal,US 6,82.26,148.99,Bangladesh,2023-02-07,,True
+P0172,APP-BO-0172,Verdant Studio Jacket,Apparel,Bottoms,Verdant,Sand,M,7.31,13.99,Bangladesh,2022-08-25,,True
+P0173,SPO-FI-0173,Lumina Trail Yoga Mat,Sports & Outdoors,Fitness,Lumina,N/A,One Size,160.61,256.99,Turkey,2024-05-04,,True
+P0174,GRO-SN-0174,Ridgeline Signature Sparkling Water,Grocery,Snacks,Ridgeline,N/A,One Size,21.56,30.99,Mexico,2022-02-27,,True
+P0175,APP-KI-0175,Lumina Pro Shirt,Apparel,Kids,Lumina,White,XL,21.64,47.99,China,2022-06-22,,True
+P0176,BEA-HA-0176,Solace Deluxe Cleanser,Beauty & Personal Care,Haircare,Solace,N/A,One Size,20.01,64.99,Mexico,2024-07-25,,True
+P0177,HOM-DE-0177,Fjord Classic Lamp,Home & Kitchen,Decor,Fjord,Teal,One Size,7.53,12.99,Turkey,2023-01-25,,True
+P0178,SPO-CA-0178,Ridgeline Pro Dumbbell Set,Sports & Outdoors,Camping,Ridgeline,N/A,One Size,25.11,43.99,Bangladesh,2022-09-08,,True
+P0179,BEA-SK-0179,Kestrel Trail Lip Balm,Beauty & Personal Care,Skincare,Kestrel,N/A,One Size,3.44,7.99,Portugal,2023-05-13,2025-07-09,False
+P0180,APP-WO-0180,Ridgeline Trail Chinos,Apparel,Women's Tops,Ridgeline,Teal,M,53.31,125.99,USA,2022-10-10,,True
+P0181,APP-BO-0181,Northwind Pro Polo,Apparel,Bottoms,Northwind,Burgundy,XS,36.68,82.99,Portugal,2023-09-02,,True
+P0182,APP-ME-0182,Copperleaf Deluxe Joggers,Apparel,Men's Tops,Copperleaf,Navy,XL,14.0,30.99,Bangladesh,2024-04-08,,True
+P0183,APP-WO-0183,Vertex Everyday Tee,Apparel,Women's Tops,Vertex,Olive,XL,9.14,16.99,Mexico,2026-03-28,,True
+P0184,HOM-BE-0184,Basecamp Core Duvet,Home & Kitchen,Bedding,Basecamp,Navy,One Size,31.2,58.99,Portugal,2023-01-05,,True
+P0185,BEA-CO-0185,Lumina Lite Cleanser,Beauty & Personal Care,Cosmetics,Lumina,N/A,One Size,4.31,12.99,India,2022-11-20,,True
+P0186,BEA-SK-0186,Kestrel Compact Cleanser,Beauty & Personal Care,Skincare,Kestrel,N/A,One Size,15.26,47.99,India,2024-04-23,,True
+P0187,HOM-BE-0187,Mercato Premium Blender,Home & Kitchen,Bedding,Mercato,Burgundy,One Size,7.98,14.99,Portugal,2023-01-24,2024-11-26,False
+P0188,APP-KI-0188,Lumina Pro Jacket,Apparel,Kids,Lumina,Teal,XXL,45.87,89.99,Portugal,2022-07-03,,True
+P0189,HOM-DE-0189,Copperleaf Signature Vase,Home & Kitchen,Decor,Copperleaf,Burgundy,One Size,32.85,59.99,Portugal,2025-11-01,,True
+P0190,ELE-CO-0190,Fjord Signature Monitor,Electronics,Computing,Fjord,N/A,One Size,77.52,97.99,Portugal,2025-01-03,,True
+P0191,BEA-FR-0191,Northwind Essential Eau de Parfum,Beauty & Personal Care,Fragrance,Northwind,N/A,One Size,3.11,9.99,China,2022-03-15,,True
+P0192,ELE-MO-0192,Ridgeline Premium Power Bank,Electronics,Mobile Accessories,Ridgeline,N/A,One Size,475.79,642.99,USA,2024-03-14,,True
+P0193,FOO-BO-0193,Lumina Heritage Trainer,Footwear,Boots,Lumina,Grey,US 11,40.43,95.99,USA,2024-07-25,,True
+P0194,APP-WO-0194,Solace Heritage Joggers,Apparel,Women's Tops,Solace,Grey,L,13.3,27.99,USA,2023-12-28,,True
+P0195,FOO-SA-0195,Solace Everyday Slide,Footwear,Sandals,Solace,White,US 8,40.28,82.99,India,2023-07-27,,True
+P0196,APP-BO-0196,Verdant Signature Jacket,Apparel,Bottoms,Verdant,Navy,S,9.68,22.99,India,2025-07-18,,True
+P0197,APP-OU-0197,Northwind Classic Polo,Apparel,Outerwear,Northwind,Sand,XL,5.27,12.99,Portugal,2025-06-27,,True
+P0198,SPO-CY-0198,Copperleaf Everyday Yoga Mat,Sports & Outdoors,Cycling,Copperleaf,N/A,One Size,13.44,25.99,USA,2025-07-15,,True
+P0199,HOM-DE-0199,Nimbus Signature Cutting Board,Home & Kitchen,Decor,Nimbus,Burgundy,One Size,15.35,26.99,Vietnam,2023-05-15,,True
+P0200,BEA-HA-0200,Northwind Pro Eau de Parfum,Beauty & Personal Care,Haircare,Northwind,N/A,One Size,15.87,41.99,USA,2023-01-11,,True
+P0201,ELE-WE-0201,Mercato Heritage Power Bank,Electronics,Wearables,Mercato,N/A,One Size,14.11,17.99,Portugal,2023-03-03,,True
+P0202,GRO-BE-0202,Vertex Studio Trail Mix,Grocery,Beverages,Vertex,N/A,One Size,1.33,2.11,Mexico,2026-03-06,,True
+P0203,GRO-HO-0203,Vertex Trail Dish Soap,Grocery,Household,Vertex,N/A,One Size,19.77,28.99,Mexico,2024-05-23,,True
+P0204,BEA-FR-0204,Halcyon Everyday Lip Balm,Beauty & Personal Care,Fragrance,Halcyon,N/A,One Size,31.22,76.99,Bangladesh,2022-10-15,,True
+P0205,ELE-SM-0205,Nimbus Premium Keyboard,Electronics,Smart Home,Nimbus,N/A,One Size,68.92,102.99,Bangladesh,2024-01-17,,True
+P0206,SPO-TE-0206,Ridgeline Essential Bike Light,Sports & Outdoors,Team Sports,Ridgeline,N/A,One Size,198.3,312.99,Turkey,2023-01-23,,True
+P0207,BEA-SK-0207,Copperleaf Pro Shampoo,Beauty & Personal Care,Skincare,Copperleaf,N/A,One Size,8.73,24.99,Vietnam,2024-05-29,,True
+P0208,SPO-TE-0208,Northwind Urban Backpack,Sports & Outdoors,Team Sports,Northwind,N/A,One Size,82.39,124.99,India,2022-03-28,,True
+P0209,BEA-SK-0209,Aurora Classic Eau de Parfum,Beauty & Personal Care,Skincare,Aurora,N/A,One Size,4.11,9.99,India,2023-11-18,,True
+P0210,HOM-ST-0210,Kestrel Lite Duvet,Home & Kitchen,Storage,Kestrel,Charcoal,One Size,9.06,13.99,Portugal,2022-12-24,,True
+P0211,ELE-SM-0211,Solace Premium Smartwatch,Electronics,Smart Home,Solace,N/A,One Size,12.53,16.99,India,2022-09-21,,True
+P0212,GRO-BE-0212,Northwind Signature Pasta,Grocery,Beverages,Northwind,N/A,One Size,16.15,21.99,USA,2022-09-09,,True
+P0213,APP-WO-0213,Fjord Signature Shirt,Apparel,Women's Tops,Fjord,Black,XXL,8.87,17.99,Turkey,2026-03-26,,True
+P0214,GRO-BE-0214,Kestrel Urban Coffee Beans,Grocery,Beverages,Kestrel,N/A,One Size,1.48,2.35,Vietnam,2024-04-06,,True
+P0215,GRO-SN-0215,Ridgeline Trail Trail Mix,Grocery,Snacks,Ridgeline,N/A,One Size,3.13,4.48,China,2022-03-11,,True
+P0216,ELE-MO-0216,Kestrel Trail Monitor,Electronics,Mobile Accessories,Kestrel,N/A,One Size,25.46,32.99,Portugal,2025-04-21,,True
+P0217,APP-BO-0217,Halcyon Lite Chinos,Apparel,Bottoms,Halcyon,Burgundy,XS,15.7,31.99,USA,2023-11-02,,True
+P0218,APP-ME-0218,Copperleaf Urban Chinos,Apparel,Men's Tops,Copperleaf,Navy,M,6.52,13.99,China,2023-03-22,,True
+P0219,GRO-SN-0219,Mercato Premium Pasta,Grocery,Snacks,Mercato,N/A,One Size,11.8,18.99,USA,2025-03-17,,True
+P0220,HOM-BE-0220,Kestrel Classic Skillet,Home & Kitchen,Bedding,Kestrel,Charcoal,One Size,15.43,23.99,USA,2025-11-14,,True
+P0221,APP-ME-0221,Copperleaf Lite Jacket,Apparel,Men's Tops,Copperleaf,Black,S,15.32,30.99,USA,2025-08-16,,True
+P0222,GRO-SN-0222,Solace Deluxe Sparkling Water,Grocery,Snacks,Solace,N/A,One Size,3.93,5.99,USA,2024-06-01,,True
+P0223,BEA-FR-0223,Verdant Compact Shampoo,Beauty & Personal Care,Fragrance,Verdant,N/A,One Size,47.15,97.99,India,2022-04-20,2024-10-01,False
+P0224,BEA-FR-0224,Ridgeline Deluxe Moisturizer,Beauty & Personal Care,Fragrance,Ridgeline,N/A,One Size,37.95,78.99,USA,2023-02-06,,True
+P0225,FOO-SN-0225,Nimbus Lite Hiker,Footwear,Sneakers,Nimbus,Burgundy,US 8,95.93,173.99,Mexico,2023-07-16,,True
+P0226,APP-BO-0226,Basecamp Trail Tee,Apparel,Bottoms,Basecamp,Grey,S,14.52,31.99,Mexico,2024-03-18,,True
+P0227,GRO-HO-0227,Mercato Deluxe Granola,Grocery,Household,Mercato,N/A,One Size,8.27,10.99,India,2024-03-27,,True
+P0228,APP-WO-0228,Kestrel Trail Jacket,Apparel,Women's Tops,Kestrel,Olive,S,6.72,14.99,India,2022-10-23,2024-05-01,False
+P0229,APP-WO-0229,Nimbus Essential Polo,Apparel,Women's Tops,Nimbus,Sand,M,9.9,19.99,China,2024-04-15,,True
+P0230,GRO-HO-0230,Fjord Pro Trail Mix,Grocery,Household,Fjord,N/A,One Size,5.69,8.99,Mexico,2024-10-20,,True
+P0231,FOO-FO-0231,Halcyon Urban Loafer,Footwear,Formal,Halcyon,Sand,US 6,19.28,43.99,Turkey,2023-07-24,,True
+P0232,FOO-SN-0232,Mercato Heritage Boot,Footwear,Sneakers,Mercato,Teal,US 8,93.05,199.99,Bangladesh,2024-05-09,,True
+P0233,FOO-BO-0233,Verdant Classic Boot,Footwear,Boots,Verdant,Charcoal,US 10,26.52,49.99,India,2023-09-05,,True
+P0234,HOM-ST-0234,Nimbus Compact Skillet,Home & Kitchen,Storage,Nimbus,Grey,One Size,35.94,73.99,USA,2023-08-27,,True
+P0235,ELE-SM-0235,Halcyon Trail Monitor,Electronics,Smart Home,Halcyon,N/A,One Size,81.31,100.99,Vietnam,2025-07-22,,True
+P0236,SPO-CY-0236,Mercato Studio Jump Rope,Sports & Outdoors,Cycling,Mercato,N/A,One Size,92.99,175.99,Turkey,2023-01-28,2023-10-24,False
+P0237,SPO-TE-0237,Halcyon Urban Tent,Sports & Outdoors,Team Sports,Halcyon,N/A,One Size,16.71,26.99,Portugal,2022-11-06,2024-09-28,False
+P0238,APP-KI-0238,Lumina Pro Hoodie,Apparel,Kids,Lumina,Burgundy,XS,36.58,81.99,Vietnam,2022-03-11,,True
+P0239,APP-OU-0239,Nimbus Compact Polo,Apparel,Outerwear,Nimbus,Black,S,44.16,93.99,USA,2022-04-01,,True
+P0240,HOM-BE-0240,Mercato Core Blender,Home & Kitchen,Bedding,Mercato,Navy,One Size,7.01,11.99,India,2022-02-18,,True
+P0241,BEA-CO-0241,Fjord Studio Mask,Beauty & Personal Care,Cosmetics,Fjord,N/A,One Size,3.4,6.99,Portugal,2025-04-21,,True
+P0242,APP-KI-0242,Aurora Studio Jacket,Apparel,Kids,Aurora,Burgundy,M,28.18,57.99,Vietnam,2023-05-11,,True
+P0243,ELE-WE-0243,Solace Trail Speaker,Electronics,Wearables,Solace,N/A,One Size,25.07,30.99,Vietnam,2024-05-31,,True
+P0244,SPO-CY-0244,Halcyon Deluxe Yoga Mat,Sports & Outdoors,Cycling,Halcyon,N/A,One Size,10.71,15.99,Portugal,2024-05-13,,True
+P0245,BEA-FR-0245,Copperleaf Urban Serum,Beauty & Personal Care,Fragrance,Copperleaf,N/A,One Size,54.98,116.99,Portugal,2023-05-09,2024-06-15,False
+P0246,HOM-SM-0246,Halcyon Compact Duvet,Home & Kitchen,Small Appliances,Halcyon,Olive,One Size,24.09,40.99,Mexico,2023-09-22,,True
+P0247,ELE-MO-0247,Northwind Premium Charger,Electronics,Mobile Accessories,Northwind,N/A,One Size,146.13,182.99,Vietnam,2022-06-09,,True
+P0248,APP-WO-0248,Aurora Classic Chinos,Apparel,Women's Tops,Aurora,Sand,M,94.37,173.99,USA,2022-09-15,2024-11-17,False
+P0249,APP-WO-0249,Mercato Premium Polo,Apparel,Women's Tops,Mercato,Navy,S,12.94,24.99,USA,2023-05-06,,True
+P0250,SPO-CA-0250,Verdant Premium Dumbbell Set,Sports & Outdoors,Camping,Verdant,N/A,One Size,57.0,90.99,India,2022-06-08,,True
+P0251,ELE-AU-0251,Solace Core Mouse,Electronics,Audio,Solace,N/A,One Size,18.76,23.99,USA,2025-07-03,,True
+P0252,BEA-SK-0252,Verdant Everyday Cleanser,Beauty & Personal Care,Skincare,Verdant,N/A,One Size,25.77,52.99,India,2022-05-14,,True
+P0253,BEA-CO-0253,Copperleaf Studio Eau de Parfum,Beauty & Personal Care,Cosmetics,Copperleaf,N/A,One Size,15.12,48.99,Portugal,2023-10-16,,True
+P0254,GRO-BE-0254,Fjord Premium Coffee Beans,Grocery,Beverages,Fjord,N/A,One Size,7.73,10.99,Portugal,2024-02-01,2025-07-22,False
+P0255,HOM-ST-0255,Halcyon Studio Storage Set,Home & Kitchen,Storage,Halcyon,Sand,One Size,45.89,88.99,USA,2022-08-14,,True
+P0256,HOM-CO-0256,Nimbus Core Blender,Home & Kitchen,Cookware,Nimbus,Grey,One Size,7.14,12.99,USA,2022-11-29,,True
+P0257,HOM-ST-0257,Kestrel Compact Vase,Home & Kitchen,Storage,Kestrel,Teal,One Size,103.82,196.99,China,2023-09-04,2025-03-20,False
+P0258,ELE-SM-0258,Nimbus Lite Smartwatch,Electronics,Smart Home,Nimbus,N/A,One Size,32.12,39.99,India,2024-01-11,,True
+P0259,SPO-CY-0259,Aurora Core Bike Light,Sports & Outdoors,Cycling,Aurora,N/A,One Size,212.05,348.99,Vietnam,2024-02-10,,True
+P0260,HOM-DE-0260,Vertex Compact Cutting Board,Home & Kitchen,Decor,Vertex,Burgundy,One Size,34.78,53.99,Mexico,2023-01-15,,True
+P0261,GRO-BE-0261,Halcyon Signature Coffee Beans,Grocery,Beverages,Halcyon,N/A,One Size,10.58,14.99,India,2023-04-10,,True
+P0262,SPO-FI-0262,Basecamp Premium Yoga Mat,Sports & Outdoors,Fitness,Basecamp,N/A,One Size,57.07,88.99,Turkey,2025-04-19,,True
+P0263,GRO-BE-0263,Vertex Signature Trail Mix,Grocery,Beverages,Vertex,N/A,One Size,22.0,33.99,Mexico,2023-12-16,,True
+P0264,APP-ME-0264,Nimbus Core Shirt,Apparel,Men's Tops,Nimbus,Black,XS,48.58,99.99,Portugal,2023-10-10,,True
+P0265,APP-ME-0265,Solace Core Jacket,Apparel,Men's Tops,Solace,Charcoal,S,86.41,165.99,Portugal,2023-01-25,,True
+P0266,GRO-BE-0266,Lumina Trail Pasta,Grocery,Beverages,Lumina,N/A,One Size,1.59,2.16,Turkey,2025-05-26,,True
+P0267,HOM-DE-0267,Halcyon Studio Duvet,Home & Kitchen,Decor,Halcyon,White,One Size,6.96,10.99,Vietnam,2023-08-11,,True
+P0268,BEA-HA-0268,Verdant Lite Eau de Parfum,Beauty & Personal Care,Haircare,Verdant,N/A,One Size,14.06,38.99,Portugal,2026-01-11,,True
+P0269,APP-ME-0269,Ridgeline Premium Chinos,Apparel,Men's Tops,Ridgeline,Olive,XXL,20.21,40.99,USA,2024-12-25,,True
+P0270,HOM-SM-0270,Aurora Deluxe Duvet,Home & Kitchen,Small Appliances,Aurora,White,One Size,149.2,234.99,Portugal,2023-09-03,,True
+P0271,ELE-CO-0271,Halcyon Compact Mouse,Electronics,Computing,Halcyon,N/A,One Size,20.2,27.99,Vietnam,2024-07-04,,True
+P0272,SPO-CA-0272,Solace Urban Tent,Sports & Outdoors,Camping,Solace,N/A,One Size,20.68,34.99,Turkey,2022-09-06,,True
+P0273,SPO-TE-0273,Copperleaf Signature Tent,Sports & Outdoors,Team Sports,Copperleaf,N/A,One Size,184.12,318.99,India,2024-01-09,,True
+P0274,APP-WO-0274,Nimbus Everyday Shirt,Apparel,Women's Tops,Nimbus,Charcoal,M,58.9,132.99,Turkey,2023-05-13,,True
+P0275,APP-WO-0275,Halcyon Compact Joggers,Apparel,Women's Tops,Halcyon,White,XL,22.98,56.99,Bangladesh,2022-09-18,,True
+P0276,SPO-TE-0276,Northwind Signature Dumbbell Set,Sports & Outdoors,Team Sports,Northwind,N/A,One Size,117.38,214.99,China,2023-07-20,,True
+P0277,APP-WO-0277,Ridgeline Essential Chinos,Apparel,Women's Tops,Ridgeline,Sand,XL,17.38,35.99,Portugal,2022-07-07,,True
+P0278,HOM-SM-0278,Basecamp Urban Duvet,Home & Kitchen,Small Appliances,Basecamp,Charcoal,One Size,26.19,44.99,Turkey,2023-01-27,,True
+P0279,SPO-CY-0279,Ridgeline Classic Tent,Sports & Outdoors,Cycling,Ridgeline,N/A,One Size,107.9,204.99,China,2023-11-30,,True
+P0280,APP-OU-0280,Halcyon Premium Chinos,Apparel,Outerwear,Halcyon,White,M,18.66,47.99,USA,2023-08-18,,True
+P0281,SPO-CY-0281,Northwind Signature Tent,Sports & Outdoors,Cycling,Northwind,N/A,One Size,144.56,259.99,Turkey,2022-12-05,,True
+P0282,ELE-CO-0282,Copperleaf Pro Power Bank,Electronics,Computing,Copperleaf,N/A,One Size,22.22,30.99,Bangladesh,2022-08-11,,True
+P0283,SPO-TE-0283,Lumina Pro Bottle,Sports & Outdoors,Team Sports,Lumina,N/A,One Size,262.99,387.99,Turkey,2023-07-18,,True
+P0284,ELE-CO-0284,Vertex Essential Hub,Electronics,Computing,Vertex,N/A,One Size,310.47,388.99,Mexico,2024-03-11,2025-06-29,False
+P0285,FOO-BO-0285,Solace Essential Slide,Footwear,Boots,Solace,Grey,US 6,22.2,43.99,India,2023-06-14,,True
+P0286,BEA-CO-0286,Copperleaf Lite Eau de Parfum,Beauty & Personal Care,Cosmetics,Copperleaf,N/A,One Size,5.55,11.99,China,2022-08-28,2025-01-06,False
+P0287,SPO-FI-0287,Aurora Trail Jump Rope,Sports & Outdoors,Fitness,Aurora,N/A,One Size,106.26,202.99,Mexico,2023-05-02,,True
+P0288,GRO-PA-0288,Aurora Studio Olive Oil,Grocery,Pantry,Aurora,N/A,One Size,1.58,2.51,Portugal,2023-05-04,,True
+P0289,APP-WO-0289,Verdant Essential Polo,Apparel,Women's Tops,Verdant,White,XS,5.9,13.99,India,2023-02-06,,True
+P0290,APP-OU-0290,Aurora Everyday Sweater,Apparel,Outerwear,Aurora,Burgundy,L,16.42,31.99,Bangladesh,2022-09-16,,True
+P0291,SPO-CY-0291,Aurora Urban Backpack,Sports & Outdoors,Cycling,Aurora,N/A,One Size,203.13,384.99,Turkey,2024-05-20,,True
+P0292,BEA-HA-0292,Nimbus Classic Eau de Parfum,Beauty & Personal Care,Haircare,Nimbus,N/A,One Size,3.04,7.99,Vietnam,2023-02-02,,True
+P0293,APP-KI-0293,Vertex Classic Tee,Apparel,Kids,Vertex,Olive,S,55.31,127.99,USA,2024-09-23,,True
+P0294,GRO-PA-0294,Ridgeline Pro Pasta,Grocery,Pantry,Ridgeline,N/A,One Size,1.49,2.37,Vietnam,2022-11-29,,True
+P0295,SPO-CA-0295,Solace Compact Yoga Mat,Sports & Outdoors,Camping,Solace,N/A,One Size,38.18,63.99,India,2024-01-15,,True
+P0296,FOO-SA-0296,Solace Lite Slide,Footwear,Sandals,Solace,Burgundy,US 7,75.17,143.99,India,2024-06-21,,True
+P0297,APP-BO-0297,Aurora Compact Sweater,Apparel,Bottoms,Aurora,Olive,XL,16.2,33.99,India,2023-08-29,,True
+P0298,ELE-SM-0298,Vertex Compact Earbuds,Electronics,Smart Home,Vertex,N/A,One Size,61.81,83.99,Portugal,2023-06-16,,True
+P0299,ELE-CO-0299,Halcyon Trail Power Bank,Electronics,Computing,Halcyon,N/A,One Size,12.96,17.99,China,2022-04-17,2023-09-02,False
+P0300,APP-ME-0300,Lumina Premium Jacket,Apparel,Men's Tops,Lumina,Charcoal,S,28.04,50.99,Portugal,2024-12-02,,True
