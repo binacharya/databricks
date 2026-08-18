@@ -2,6 +2,9 @@ resources:
   jobs:
     dbt_databricks_job:
       name: "DBT automation job from code"
+      parameters:
+        - name: dbt_select
+          default: "fqn:*"
       tasks:
         - task_key: dbt_pipeline_run
           dbt_task:
@@ -10,7 +13,7 @@ resources:
               - dbt deps
               - dbt seed
               - dbt snapshot
-              - dbt build
+              - dbt build --select "{{job.parameters.dbt_select}}"
             warehouse_id: ${var.warehouse_id}
             catalog:  ${var.catalog}
             source: WORKSPACE
