@@ -2,10 +2,6 @@ resources:
   jobs:
     dbt_databricks_job:
       name: "DBT automation job from code"
-      schedule:
-        quartz_cron_expression: 44 6 15 * * ?
-        timezone_id: Asia/Katmandu
-        pause_status: UNPAUSED
       tasks:
         - task_key: dbt_pipeline_run
           dbt_task:

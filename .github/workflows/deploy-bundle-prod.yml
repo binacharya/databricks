@@ -21,6 +21,14 @@ jobs:
       - name: Set up Databricks CLI
         uses: databricks/setup-cli@main
 
+      - name: Debug host format (no secret leaked)
+        run: |
+          echo "Host length: ${#DATABRICKS_HOST}"
+          echo "Starts with https://: $([[ "$DATABRICKS_HOST" == https://* ]] && echo yes || echo no)"
+          echo "Ends with slash: $([[ "$DATABRICKS_HOST" == */ ]] && echo yes || echo no)"
+          echo "Has trailing whitespace/newline: $([[ "$DATABRICKS_HOST" =~ [[:space:]]$ ]] && echo yes || echo no)"
+          echo "Token length: ${#DATABRICKS_TOKEN}"
+
       - name: Validate bundle
         run: |
           n=0
