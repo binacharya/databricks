@@ -50,3 +50,6 @@ jobs:
             sleep 10
           done
           exit 1
+
+      - name: Run dbt pipeline job
+        run: databricks bundle run dbt_databricks_job -t prod
