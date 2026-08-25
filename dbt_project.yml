@@ -46,6 +46,8 @@ snapshots:
 seeds:
   analytics:
     +schema: bronze
+    dq_tables_config:
+      +schema: config
     # raw_customers:
     #   +column_types:
     #     customer_id: string

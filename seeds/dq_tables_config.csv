@@ -1,0 +1,10 @@
+catalog,schema_name,table_name,enabled
+workspace,silver,stg_orders,true
+workspace,silver,stg_order_items,true
+workspace,silver,stg_products,true
+workspace,silver,int_orders_enriched,true
+workspace,silver,int_order_items_with_product,true
+workspace,gold,fct_orders,true
+workspace,gold,fct_order_items,true
+workspace,gold,dim_products,true
+workspace,gold,scd_customers,true

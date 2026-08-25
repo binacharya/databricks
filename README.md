@@ -174,6 +174,21 @@ databricks bundle run dbt_databricks_job -t dev    # or -t prod
 databricks bundle run dbt_databricks_job -t dev --params dbt_select="stg_orders+"
 ```
 
-## License
+### Data quality: null percentage check
 
-See [LICENSE](LICENSE).
+After the dbt task runs, a second task (`null_percentage_check`) runs `scripts/check_null_percentage.py`, which computes the null/None percentage per column for a config-driven list of tables:
+
+- **`seeds/dq_tables_config.csv`** — one row per table to check (`catalog`, `schema_name`, `table_name`, `enabled`). Lists the model-layer tables (`stg_orders`, `stg_order_items`, `stg_products`, `int_orders_enriched`, `int_order_items_with_product`, `fct_orders`, `fct_order_items`, `dim_products`, `scd_customers`). Loaded via `dbt seed` into `<catalog>.config.dq_tables_config`. Add or disable tables by editing this CSV.
+- **`<catalog>.config.dq_null_check_results`** — results table (created automatically on first run). One row per `(run, table, column)` with `total_rows`, `null_count`, `null_pct`, so history accumulates across runs.
+- The script also prints a summary table to the job's logs.
+
+It runs two ways:
+
+- **As a job task** (already wired in): uses the native Spark session on the job's compute — no credentials needed.
+- **Standalone** (locally or in CI): uses `databricks-sql-connector` with the same `DATABRICKS_HOST` / `DATABRICKS_HTTP_PATH` / `DATABRICKS_TOKEN` env vars as the rest of this project:
+  ```bash
+  export DATABRICKS_HOST="dbc-xxxxxxxx-xxxx.cloud.databricks.com"
+  export DATABRICKS_HTTP_PATH="/sql/1.0/warehouses/xxxxx"
+  export DATABRICKS_TOKEN="dapi..."
+  python scripts/check_null_percentage.py
+  ```

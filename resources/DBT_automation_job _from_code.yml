@@ -23,6 +23,13 @@ resources:
             on_failure:
               - acharyabina01@gmail.com
           environment_key: dbt-default
+        - task_key: null_percentage_check
+          depends_on:
+            - task_key: dbt_pipeline_run
+          spark_python_task:
+            python_file: ../scripts/check_null_percentage.py
+            source: WORKSPACE
+          environment_key: python-dq-default
       queue:
         enabled: true
       environments:
@@ -30,5 +37,8 @@ resources:
           spec:
             dependencies:
               - dbt-databricks>=1.0.0,<2.0.0
+            environment_version: "4"
+        - environment_key: python-dq-default
+          spec:
             environment_version: "4"
       performance_target: PERFORMANCE_OPTIMIZED
