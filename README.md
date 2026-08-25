@@ -184,15 +184,30 @@ After the dbt task runs, two more tasks run in sequence: **`null_percentage_chec
 - **`<catalog>.config.dq_null_check_results`** — results table (created automatically on first run). One row per `(table, column)` with `run_ts`, `total_rows`, `null_count`, `null_pct`. Each run **truncates and replaces** the table's contents — it only ever holds the latest run's results, not a history.
 - Also prints a summary table to the job's logs.
 
-**`send_null_report`** — reads whatever's currently in `dq_null_check_results` (i.e. the report `null_percentage_check` just wrote) and emails it via Gmail SMTP. The email body is an HTML table, color-coded by severity (green = 0% null, orange = under 5%, red = 5%+), with the same data attached as both a **CSV** and a **PDF** (built with `fpdf2`, a pure-Python PDF library — no system dependencies, so it installs cleanly in the serverless job environment too):
-```bash
-export SMTP_USERNAME="youraddress@gmail.com"
-export SMTP_PASSWORD="xxxx xxxx xxxx xxxx"   # Gmail app password, not your login password
-```
-- Generate an app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification enabled on the Google account).
-- Recipient defaults to `acharyabina01@gmail.com`; override with `DQ_REPORT_RECIPIENT`.
-- If `SMTP_USERNAME`/`SMTP_PASSWORD` aren't set, it prints the report and skips the email instead of failing.
-- **Not yet wired into the Databricks job task** — those env vars aren't set anywhere in `resources/DBT_automation_job _from_code.yml`, since putting a real password in that YAML would commit it to git. To enable emailing from the job itself, store the password in a [Databricks secret scope](https://docs.databricks.com/aws/en/security/secrets/) and reference it in the task config, rather than a plaintext env var. Until then, the `send_null_report` task will run and simply no-op (skip emailing) inside the pipeline.
+**`send_null_report`** — reads whatever's currently in `dq_null_check_results` (i.e. the report `null_percentage_check` just wrote) and emails it via Gmail SMTP. The email body is an HTML table, color-coded by severity (green = 0% null, orange = under 5%, red = 5%+), with the same data attached as both a **CSV** and a **PDF** (built with `fpdf2`, a pure-Python PDF library — no system dependencies, so it installs cleanly in the serverless job environment too).
+
+Recipient defaults to `acharyabina01@gmail.com` (the same address already used in the job's `email_notifications`); override with `DQ_REPORT_RECIPIENT`.
+
+Credentials are looked up two different ways depending on where the script runs, so nothing needs to be hardcoded or committed:
+
+- **Running standalone** (locally or in CI): copy `.env.example` to `.env`, fill in your email and app password, then `source` it before running the script:
+  ```bash
+  cp .env.example .env
+  # edit .env with your real email + app password
+  source .env
+  python scripts/send_null_report_email.py
+  ```
+  `.env` is gitignored, so real values never get committed. Generate an app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification enabled on the Google account).
+
+- **Running as the `send_null_report` job task**: the env vars above aren't set anywhere in `resources/DBT_automation_job _from_code.yml` (a real password in that committed YAML would leak it via git). Instead, the script automatically falls back to a **Databricks secret scope** when it detects it's running on Databricks compute. Set it up once:
+  ```bash
+  databricks secrets create-scope dq-report
+  databricks secrets put-secret dq-report smtp-username --string-value "youraddress@gmail.com"
+  databricks secrets put-secret dq-report smtp-password --string-value "xxxx xxxx xxxx xxxx"
+  ```
+  No job YAML changes needed — the script reads the scope directly via `dbutils.secrets.get()` at runtime. Scope name defaults to `dq-report`; override via `DQ_SECRET_SCOPE` if you name it differently.
+
+If neither source has credentials, the script prints the report and skips the email instead of failing the task.
 
 Both scripts run two ways:
 

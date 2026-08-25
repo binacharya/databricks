@@ -9,8 +9,14 @@ Runs two ways, same as check_null_percentage.py:
 - Standalone (locally or in CI): uses databricks-sql-connector with
   DATABRICKS_HOST / DATABRICKS_HTTP_PATH / DATABRICKS_TOKEN env vars.
 
-Sends via Gmail SMTP using SMTP_USERNAME / SMTP_PASSWORD (a Gmail app
-password) env vars. If they aren't set, prints the report and skips emailing
+Sends via Gmail SMTP. Credentials are looked up two ways:
+- SMTP_USERNAME / SMTP_PASSWORD env vars (for standalone/local/CI runs).
+- If those aren't set and this is running on Databricks compute, falls back
+  to a Databricks secret scope (default "dq-report", override via
+  DQ_SECRET_SCOPE) with keys "smtp-username" / "smtp-password". See README
+  for the `databricks secrets` CLI commands to set this up once.
+
+If neither source has credentials, prints the report and skips emailing
 instead of failing. The email body is an HTML table (color-coded by null %),
 with the same data attached as both a CSV and a PDF.
 """
@@ -58,11 +64,35 @@ def get_latest_results(spark, connection):
     return results, run_ts
 
 
-def send_report_email(results, run_label):
+def _get_smtp_credentials(spark):
     smtp_username = os.environ.get("SMTP_USERNAME")
     smtp_password = os.environ.get("SMTP_PASSWORD")
+    if smtp_username and smtp_password:
+        return smtp_username, smtp_password
+
+    if spark is None:
+        return None, None
+
+    scope = os.environ.get("DQ_SECRET_SCOPE", "dq-report")
+    try:
+        from pyspark.dbutils import DBUtils
+
+        dbutils = DBUtils(spark)
+        smtp_username = dbutils.secrets.get(scope=scope, key="smtp-username")
+        smtp_password = dbutils.secrets.get(scope=scope, key="smtp-password")
+        return smtp_username, smtp_password
+    except Exception as e:
+        print(f"Could not read SMTP credentials from secret scope '{scope}': {e}")
+        return None, None
+
+
+def send_report_email(results, run_label, spark):
+    smtp_username, smtp_password = _get_smtp_credentials(spark)
     if not smtp_username or not smtp_password:
-        print("SMTP_USERNAME/SMTP_PASSWORD not set — skipping email.")
+        print(
+            "No SMTP credentials found (checked SMTP_USERNAME/SMTP_PASSWORD env vars, "
+            "then the Databricks secret scope) — skipping email."
+        )
         return
 
     recipient = os.environ.get("DQ_REPORT_RECIPIENT", "acharyabina01@gmail.com")
@@ -119,7 +149,7 @@ def main():
 
         run_label = run_ts.isoformat() if hasattr(run_ts, "isoformat") else str(run_ts or datetime.now(timezone.utc))
         print(format_report(results))
-        send_report_email(results, run_label)
+        send_report_email(results, run_label, spark)
     finally:
         if connection is not None:
             connection.close()
