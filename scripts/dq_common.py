@@ -115,13 +115,31 @@ def build_html_report(results):
     )
 
 
+def _pdf_safe(text):
+    """fpdf2's core fonts (Helvetica etc.) only support Latin-1, not full
+    Unicode — swap common punctuation for ASCII equivalents, then drop
+    anything else that still doesn't fit rather than crashing the run."""
+    text = str(text)
+    replacements = {
+        "—": "-",  # em dash
+        "–": "-",  # en dash
+        "‘": "'",
+        "’": "'",
+        "“": '"',
+        "”": '"',
+    }
+    for bad, good in replacements.items():
+        text = text.replace(bad, good)
+    return text.encode("latin-1", "replace").decode("latin-1")
+
+
 def build_pdf_bytes(results, title):
     from fpdf import FPDF
 
     pdf = FPDF(orientation="L", unit="mm", format="A4")
     pdf.add_page()
     pdf.set_font("Helvetica", "B", 14)
-    pdf.cell(0, 10, title)
+    pdf.cell(0, 10, _pdf_safe(title))
     pdf.ln(12)
 
     col_widths = [70, 55, 45, 30, 30, 25]
@@ -131,7 +149,7 @@ def build_pdf_bytes(results, title):
     pdf.set_fill_color(44, 62, 80)
     pdf.set_text_color(255, 255, 255)
     for w, h in zip(col_widths, headers):
-        pdf.cell(w, 8, h, border=1, fill=True)
+        pdf.cell(w, 8, _pdf_safe(h), border=1, fill=True)
     pdf.ln()
 
     pdf.set_font("Helvetica", "", 9)
@@ -140,9 +158,9 @@ def build_pdf_bytes(results, title):
         pdf.cell(0, 8, "No results.", border=1)
     for r in results:
         row_cells = [
-            r["table_name"],
-            r["column_name"],
-            f"{r['catalog']}.{r['schema_name']}",
+            _pdf_safe(r["table_name"]),
+            _pdf_safe(r["column_name"]),
+            _pdf_safe(f"{r['catalog']}.{r['schema_name']}"),
             str(r["total_rows"]),
             str(r["null_count"]),
             f"{r['null_pct']:.2f}%",
