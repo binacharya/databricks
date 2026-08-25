@@ -53,6 +53,19 @@ jobs:
           done
           exit 1
 
+      - name: Configure SMTP secret in Databricks
+        env:
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: |
+          if [ -z "$SMTP_USERNAME" ] || [ -z "$SMTP_PASSWORD" ]; then
+            echo "SMTP_USERNAME/SMTP_PASSWORD GitHub secrets not set — skipping secret scope setup."
+            exit 0
+          fi
+          databricks secrets create-scope dq-report 2>/dev/null || true
+          databricks secrets put-secret dq-report smtp-username --string-value "$SMTP_USERNAME"
+          databricks secrets put-secret dq-report smtp-password --string-value "$SMTP_PASSWORD"
+
       - name: Determine changed dbt models
         id: changed_models
         run: |

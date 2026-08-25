@@ -199,13 +199,19 @@ Credentials are looked up two different ways depending on where the script runs,
   ```
   `.env` is gitignored, so real values never get committed. Generate an app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification enabled on the Google account).
 
-- **Running as the `send_null_report` job task**: the env vars above aren't set anywhere in `resources/DBT_automation_job _from_code.yml` (a real password in that committed YAML would leak it via git). Instead, the script automatically falls back to a **Databricks secret scope** when it detects it's running on Databricks compute. Set it up once:
-  ```bash
-  databricks secrets create-scope dq-report
-  databricks secrets put-secret dq-report smtp-username --string-value "youraddress@gmail.com"
-  databricks secrets put-secret dq-report smtp-password --string-value "xxxx xxxx xxxx xxxx"
-  ```
-  No job YAML changes needed — the script reads the scope directly via `dbutils.secrets.get()` at runtime. Scope name defaults to `dq-report`; override via `DQ_SECRET_SCOPE` if you name it differently.
+- **Running as the `send_null_report` job task**: the env vars above aren't set anywhere in `resources/DBT_automation_job _from_code.yml` (a real password in that committed YAML would leak it via git). Instead, the script automatically falls back to a **Databricks secret scope** when it detects it's running on Databricks compute. Scope name defaults to `dq-report`; override via `DQ_SECRET_SCOPE` if you name it differently.
+
+  There are two ways to get the scope populated — pick one:
+
+  1. **Automatic (recommended)**: add `SMTP_USERNAME` and `SMTP_PASSWORD` as GitHub Actions secrets (Settings → Environments → `prod`, same place as `DATABRICKS_HOST`/`DATABRICKS_TOKEN`). The `Configure SMTP secret in Databricks` step in `deploy-bundle-prod.yml` creates the scope (if missing) and pushes both secrets into it on every push to `main` — no manual CLI step, and the values never pass through this repo or any chat/AI session, only through GitHub's own secret store.
+  2. **Manual, one-time**: if you have the Databricks CLI set up locally, run it yourself:
+     ```bash
+     databricks secrets create-scope dq-report
+     databricks secrets put-secret dq-report smtp-username --string-value "youraddress@gmail.com"
+     databricks secrets put-secret dq-report smtp-password --string-value "xxxx xxxx xxxx xxxx"
+     ```
+
+  Either way, no job YAML changes are needed — the script reads the scope directly via `dbutils.secrets.get()` at runtime.
 
 If neither source has credentials, the script prints the report and skips the email instead of failing the task.
 
