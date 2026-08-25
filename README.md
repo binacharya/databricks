@@ -176,19 +176,32 @@ databricks bundle run dbt_databricks_job -t dev --params dbt_select="stg_orders+
 
 ### Data quality: null percentage check
 
-After the dbt task runs, a second task (`null_percentage_check`) runs `scripts/check_null_percentage.py`, which computes the null/None percentage per column for a config-driven list of tables:
+After the dbt task runs, two more tasks run in sequence: **`null_percentage_check`** (`scripts/check_null_percentage.py`) computes and stores the report, then **`send_null_report`** (`scripts/send_null_report_email.py`) emails it. They're separate tasks/scripts so either can be re-run or swapped independently — e.g. you could point a different notification method at the same results table without touching the check logic. Shared connection/formatting helpers live in `scripts/dq_common.py` (not a standalone script, imported by both).
+
+**`null_percentage_check`** — computes the null/None percentage per column for a config-driven list of tables:
 
 - **`seeds/dq_tables_config.csv`** — one row per table to check (`catalog`, `schema_name`, `table_name`, `enabled`). Lists the model-layer tables (`stg_orders`, `stg_order_items`, `stg_products`, `int_orders_enriched`, `int_order_items_with_product`, `fct_orders`, `fct_order_items`, `dim_products`, `scd_customers`). Loaded via `dbt seed` into `<catalog>.config.dq_tables_config`. Add or disable tables by editing this CSV.
-- **`<catalog>.config.dq_null_check_results`** — results table (created automatically on first run). One row per `(run, table, column)` with `total_rows`, `null_count`, `null_pct`, so history accumulates across runs.
-- The script also prints a summary table to the job's logs.
+- **`<catalog>.config.dq_null_check_results`** — results table (created automatically on first run). One row per `(table, column)` with `run_ts`, `total_rows`, `null_count`, `null_pct`. Each run **truncates and replaces** the table's contents — it only ever holds the latest run's results, not a history.
+- Also prints a summary table to the job's logs.
 
-It runs two ways:
+**`send_null_report`** — reads whatever's currently in `dq_null_check_results` (i.e. the report `null_percentage_check` just wrote) and emails it via Gmail SMTP. The email body is an HTML table, color-coded by severity (green = 0% null, orange = under 5%, red = 5%+), with the same data attached as both a **CSV** and a **PDF** (built with `fpdf2`, a pure-Python PDF library — no system dependencies, so it installs cleanly in the serverless job environment too):
+```bash
+export SMTP_USERNAME="youraddress@gmail.com"
+export SMTP_PASSWORD="xxxx xxxx xxxx xxxx"   # Gmail app password, not your login password
+```
+- Generate an app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification enabled on the Google account).
+- Recipient defaults to `acharyabina01@gmail.com`; override with `DQ_REPORT_RECIPIENT`.
+- If `SMTP_USERNAME`/`SMTP_PASSWORD` aren't set, it prints the report and skips the email instead of failing.
+- **Not yet wired into the Databricks job task** — those env vars aren't set anywhere in `resources/DBT_automation_job _from_code.yml`, since putting a real password in that YAML would commit it to git. To enable emailing from the job itself, store the password in a [Databricks secret scope](https://docs.databricks.com/aws/en/security/secrets/) and reference it in the task config, rather than a plaintext env var. Until then, the `send_null_report` task will run and simply no-op (skip emailing) inside the pipeline.
 
-- **As a job task** (already wired in): uses the native Spark session on the job's compute — no credentials needed.
+Both scripts run two ways:
+
+- **As a job task** (already wired in): uses the native Spark session on the job's compute — no credentials needed for the DB connection (email still needs the SMTP env vars above).
 - **Standalone** (locally or in CI): uses `databricks-sql-connector` with the same `DATABRICKS_HOST` / `DATABRICKS_HTTP_PATH` / `DATABRICKS_TOKEN` env vars as the rest of this project:
   ```bash
   export DATABRICKS_HOST="dbc-xxxxxxxx-xxxx.cloud.databricks.com"
   export DATABRICKS_HTTP_PATH="/sql/1.0/warehouses/xxxxx"
   export DATABRICKS_TOKEN="dapi..."
   python scripts/check_null_percentage.py
+  python scripts/send_null_report_email.py
   ```
