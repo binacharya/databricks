@@ -20,6 +20,7 @@ on-run-start:
   - "{{ log('Starting analytics run', info=True) }}"
 on-run-end:
   - "{{ log('Finished analytics run', info=True) }}"
+  - "{{ log_test_results(results) }}"
 
 vars:
   project_schema: "shopflow"

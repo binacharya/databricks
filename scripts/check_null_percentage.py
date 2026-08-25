@@ -14,8 +14,8 @@ Results are printed and written to <catalog>.config.dq_null_check_results. Each
 run truncates the table first, so it always holds only the latest run's rows
 — it is not a history table.
 
-Emailing the report is handled separately by send_null_report_email.py (a
-different job task), which reads the results table this script writes.
+Emailing the report is handled separately by send_report_email.py --report-type
+null (a different job task), which reads the results table this script writes.
 """
 
 from datetime import datetime, timezone

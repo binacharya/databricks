@@ -1,6 +1,6 @@
 """
 Shared helpers for the data-quality scripts (check_null_percentage.py,
-send_null_report_email.py). Not a standalone entry point.
+send_report_email.py). Not a standalone entry point.
 """
 
 import os
@@ -9,6 +9,7 @@ DEFAULT_CATALOG = os.environ.get("DATABRICKS_CATALOG", "workspace")
 CONFIG_SCHEMA = os.environ.get("DQ_CONFIG_SCHEMA", "config")
 CONFIG_TABLE = f"{DEFAULT_CATALOG}.{CONFIG_SCHEMA}.dq_tables_config"
 RESULTS_TABLE = f"{DEFAULT_CATALOG}.{CONFIG_SCHEMA}.dq_null_check_results"
+TEST_RESULTS_TABLE = f"{DEFAULT_CATALOG}.{CONFIG_SCHEMA}.dq_test_results"
 
 
 def get_spark():
@@ -47,6 +48,66 @@ def row_getter(spark, row, columns):
         return lambda key: row[key]
     idx = {c: i for i, c in enumerate(columns)}
     return lambda key: row[idx[key]]
+
+
+def get_smtp_credentials(spark):
+    """SMTP_USERNAME/SMTP_PASSWORD env vars first (standalone/local/CI runs);
+    if unset and running on Databricks compute, falls back to a secret scope
+    (default "dq-report", override via DQ_SECRET_SCOPE)."""
+    smtp_username = os.environ.get("SMTP_USERNAME")
+    smtp_password = os.environ.get("SMTP_PASSWORD")
+    if smtp_username and smtp_password:
+        return smtp_username, smtp_password
+
+    if spark is None:
+        return None, None
+
+    scope = os.environ.get("DQ_SECRET_SCOPE", "dq-report")
+    try:
+        from pyspark.dbutils import DBUtils
+
+        dbutils = DBUtils(spark)
+        smtp_username = dbutils.secrets.get(scope=scope, key="smtp-username")
+        smtp_password = dbutils.secrets.get(scope=scope, key="smtp-password")
+        return smtp_username, smtp_password
+    except Exception as e:
+        print(f"Could not read SMTP credentials from secret scope '{scope}': {e}")
+        return None, None
+
+
+def send_email(subject, html_body, attachments, recipient, spark):
+    """attachments: list of (filename, bytes) tuples. Returns True if sent."""
+    smtp_username, smtp_password = get_smtp_credentials(spark)
+    if not smtp_username or not smtp_password:
+        print(
+            "No SMTP credentials found (checked SMTP_USERNAME/SMTP_PASSWORD env vars, "
+            "then the Databricks secret scope) — skipping email."
+        )
+        return False
+
+    import smtplib
+    from email.mime.application import MIMEApplication
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
+
+    msg = MIMEMultipart("mixed")
+    msg["Subject"] = subject
+    msg["From"] = smtp_username
+    msg["To"] = recipient
+    msg.attach(MIMEText(html_body, "html"))
+
+    for filename, content in attachments:
+        part = MIMEApplication(content, Name=filename)
+        part["Content-Disposition"] = f'attachment; filename="{filename}"'
+        msg.attach(part)
+
+    with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        server.starttls()
+        server.login(smtp_username, smtp_password)
+        server.sendmail(smtp_username, [recipient], msg.as_string())
+
+    print(f"Emailed report (HTML body + {len(attachments)} attachment(s)) to {recipient}.")
+    return True
 
 
 def format_report(results):
@@ -168,6 +229,118 @@ def build_pdf_bytes(results, title):
         color = _severity_color(r["null_pct"])
         for i, (w, cell_text) in enumerate(zip(col_widths, row_cells)):
             if i == len(row_cells) - 1:
+                pdf.set_text_color(*color)
+            else:
+                pdf.set_text_color(0, 0, 0)
+            pdf.cell(w, 7, cell_text, border=1)
+        pdf.ln()
+
+    return bytes(pdf.output())
+
+
+def _test_status_color(status):
+    """Red/orange/gray/green thresholds shared by the test-report HTML/PDF builders."""
+    if status == "pass":
+        return (30, 132, 73)  # green
+    if status in ("fail", "error"):
+        return (192, 57, 43)  # red
+    if status == "warn":
+        return (214, 137, 16)  # orange
+    return (127, 140, 141)  # gray (skipped or other)
+
+
+def format_test_report(results):
+    if not results:
+        return "No results."
+    header = f"{'test':<45} {'type':<10} {'model':<25} {'status':<10} {'time(s)':>8}"
+    lines = [header, "-" * len(header)]
+    for r in results:
+        lines.append(
+            f"{r['test_name']:<45} {r['test_type']:<10} {(r['model_name'] or ''):<25} "
+            f"{r['status']:<10} {r['execution_time']:>8.2f}"
+        )
+    return "\n".join(lines)
+
+
+def build_test_csv_bytes(results):
+    import csv
+    import io
+
+    output = io.StringIO()
+    fieldnames = ["test_name", "test_type", "file_path", "model_name", "status", "execution_time", "message"]
+    writer = csv.DictWriter(output, fieldnames=fieldnames)
+    writer.writeheader()
+    for r in results:
+        writer.writerow(r)
+    return output.getvalue().encode("utf-8")
+
+
+def build_test_html_report(results):
+    if not results:
+        return "<p>No results.</p>"
+
+    rows_html = []
+    for r in results:
+        color = "rgb{}".format(_test_status_color(r["status"]))
+        rows_html.append(
+            "<tr>"
+            f"<td style='padding:6px 10px;border:1px solid #ddd;'>{r['test_name']}</td>"
+            f"<td style='padding:6px 10px;border:1px solid #ddd;'>{r['test_type']}</td>"
+            f"<td style='padding:6px 10px;border:1px solid #ddd;'>{r['model_name'] or ''}</td>"
+            f"<td style='padding:6px 10px;border:1px solid #ddd;color:{color};font-weight:bold;'>{r['status']}</td>"
+            f"<td style='padding:6px 10px;border:1px solid #ddd;text-align:right;'>{r['execution_time']:.2f}s</td>"
+            f"<td style='padding:6px 10px;border:1px solid #ddd;'>{r['message'] or ''}</td>"
+            "</tr>"
+        )
+
+    return (
+        "<table style='border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;font-size:13px;width:100%;'>"
+        "<thead><tr style='background:#2c3e50;color:#ffffff;'>"
+        "<th style='padding:8px 10px;text-align:left;'>Test</th>"
+        "<th style='padding:8px 10px;text-align:left;'>Type</th>"
+        "<th style='padding:8px 10px;text-align:left;'>Model</th>"
+        "<th style='padding:8px 10px;text-align:left;'>Status</th>"
+        "<th style='padding:8px 10px;text-align:right;'>Time</th>"
+        "<th style='padding:8px 10px;text-align:left;'>Message</th>"
+        "</tr></thead><tbody>" + "".join(rows_html) + "</tbody></table>"
+    )
+
+
+def build_test_pdf_bytes(results, title):
+    from fpdf import FPDF
+
+    pdf = FPDF(orientation="L", unit="mm", format="A4")
+    pdf.add_page()
+    pdf.set_font("Helvetica", "B", 14)
+    pdf.cell(0, 10, _pdf_safe(title))
+    pdf.ln(12)
+
+    col_widths = [65, 22, 45, 20, 18, 100]
+    headers = ["Test", "Type", "Model", "Status", "Time(s)", "Message"]
+
+    pdf.set_font("Helvetica", "B", 9)
+    pdf.set_fill_color(44, 62, 80)
+    pdf.set_text_color(255, 255, 255)
+    for w, h in zip(col_widths, headers):
+        pdf.cell(w, 8, _pdf_safe(h), border=1, fill=True)
+    pdf.ln()
+
+    pdf.set_font("Helvetica", "", 8)
+    if not results:
+        pdf.set_text_color(0, 0, 0)
+        pdf.cell(0, 8, "No results.", border=1)
+    for r in results:
+        row_cells = [
+            _pdf_safe(r["test_name"]),
+            _pdf_safe(r["test_type"]),
+            _pdf_safe(r["model_name"] or ""),
+            _pdf_safe(r["status"]),
+            f"{r['execution_time']:.2f}",
+            _pdf_safe((r["message"] or "")[:90]),
+        ]
+        color = _test_status_color(r["status"])
+        for i, (w, cell_text) in enumerate(zip(col_widths, row_cells)):
+            if i == 3:
                 pdf.set_text_color(*color)
             else:
                 pdf.set_text_color(0, 0, 0)
