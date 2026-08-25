@@ -176,15 +176,26 @@ databricks bundle run dbt_databricks_job -t dev --params dbt_select="stg_orders+
 
 ### Data quality: null percentage check
 
-After the dbt task runs, two more tasks run in sequence: **`null_percentage_check`** (`scripts/check_null_percentage.py`) computes and stores the report, then **`send_null_report`** (`scripts/send_report_email.py --report-type null`) emails it. `send_report_email.py` is a single shared script that backs both the null-report and test-report email tasks — which report it sends is picked with `--report-type` (or `DQ_REPORT_TYPE` env var), since the two are otherwise structurally identical (fetch → format → email). Shared connection/formatting helpers live in `scripts/dq_common.py` (not a standalone script, imported throughout).
-
-**`null_percentage_check`** — computes the null/None percentage per column for a config-driven list of tables:
+After the dbt task runs, **`null_percentage_check`** (`scripts/check_null_percentage.py`) computes and stores the null-check report:
 
 - **`seeds/dq_tables_config.csv`** — one row per table to check (`catalog`, `schema_name`, `table_name`, `enabled`). Lists the model-layer tables (`stg_orders`, `stg_order_items`, `stg_products`, `int_orders_enriched`, `int_order_items_with_product`, `fct_orders`, `fct_order_items`, `dim_products`, `scd_customers`). Loaded via `dbt seed` into `<catalog>.config.dq_tables_config`. Add or disable tables by editing this CSV.
 - **`<catalog>.config.dq_null_check_results`** — results table (created automatically on first run). One row per `(table, column)` with `run_ts`, `total_rows`, `null_count`, `null_pct`. Each run **truncates and replaces** the table's contents — it only ever holds the latest run's results, not a history.
 - Also prints a summary table to the job's logs.
 
-**`send_null_report`** — reads whatever's currently in `dq_null_check_results` (i.e. the report `null_percentage_check` just wrote) and emails it via Gmail SMTP. The email body is an HTML table, color-coded by severity (green = 0% null, orange = under 5%, red = 5%+), with the same data attached as both a **CSV** and a **PDF** (built with `fpdf2`, a pure-Python PDF library — no system dependencies, so it installs cleanly in the serverless job environment too).
+### Data quality: test execution report
+
+Every `dbt build`/`dbt test` run also logs a pass/fail/error summary for **every test that ran** — both generic tests (defined in `_*.yml` files, e.g. `unique`/`not_null`/`relationships`/`accepted_values`) and singular tests (`tests/assert_*.sql`) — to `<catalog>.config.dq_test_results`.
+
+- **`macros/log_test_results.sql`** — a macro run from `on-run-end` in `dbt_project.yml` (right after `on-run-end` logging), using dbt's built-in `results` variable (populated automatically at the end of every invocation with the outcome of everything that ran). It filters to `resource_type == 'test'`, so it captures whatever subset of tests actually ran — including when `dbt_select` narrows a run to specific models.
+- Each row: `test_name`, `test_type` (`generic` or `singular`), `file_path` (which `.yml` or `.sql` file defined it — dbt tracks this natively via `original_file_path`), `model_name` (what it's testing, when determinable), `status` (`pass`/`fail`/`error`/`warn`/`skipped`), `execution_time`, and `message` (the failure detail, if any, truncated to 2000 chars).
+- Same convention as the null-check results table: each run **truncates and replaces** — only the latest run's test results are kept, not history.
+- The logging itself needs no separate job task — it runs as part of the existing `dbt_pipeline_run` task automatically, since it hooks into dbt's own lifecycle.
+
+Query either table directly in Databricks SQL, e.g. `SELECT * FROM workspace.config.dq_test_results WHERE status != 'pass'` to see just the failures from the last run.
+
+### Data quality: combined email report
+
+One email covers both reports — `scripts/send_report_email.py`, run as the **`send_dq_report`** job task (`depends_on: null_percentage_check`, which itself runs after `dbt_pipeline_run` — by that point both the null-check and test-result tables are populated). The email body is intentionally short — just a "reports attached, run on `<date>`" note, no data tables — with all four files attached: `null_percentage_report.csv`/`.pdf` and `test_execution_report.csv`/`.pdf` (color-coded the same way as before: null%: green/orange/red by severity; tests: green pass, red fail/error, orange warn, gray other — PDFs built with `fpdf2`, a pure-Python PDF library — no system dependencies, so it installs cleanly in the serverless job environment too).
 
 Recipient defaults to `acharyabina01@gmail.com` (the same address already used in the job's `email_notifications`); override with `DQ_REPORT_RECIPIENT`.
 
@@ -195,11 +206,11 @@ Credentials are looked up two different ways depending on where the script runs,
   cp .env.example .env
   # edit .env with your real email + app password
   source .env
-  python scripts/send_report_email.py --report-type null
+  python scripts/send_report_email.py
   ```
   `.env` is gitignored, so real values never get committed. Generate an app password at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) (requires 2-Step Verification enabled on the Google account).
 
-- **Running as the `send_null_report` job task**: the env vars above aren't set anywhere in `resources/DBT_automation_job _from_code.yml` (a real password in that committed YAML would leak it via git). Instead, the script automatically falls back to a **Databricks secret scope** when it detects it's running on Databricks compute. Scope name defaults to `dq-report`; override via `DQ_SECRET_SCOPE` if you name it differently.
+- **Running as the `send_dq_report` job task**: the env vars above aren't set anywhere in `resources/DBT_automation_job _from_code.yml` (a real password in that committed YAML would leak it via git). Instead, the script automatically falls back to a **Databricks secret scope** when it detects it's running on Databricks compute. Scope name defaults to `dq-report`; override via `DQ_SECRET_SCOPE` if you name it differently.
 
   There are two ways to get the scope populated — pick one:
 
@@ -213,31 +224,18 @@ Credentials are looked up two different ways depending on where the script runs,
 
   Either way, no job YAML changes are needed — the script reads the scope directly via `dbutils.secrets.get()` at runtime.
 
-If neither source has credentials, the script prints the report and skips the email instead of failing the task.
+If neither source has credentials, the script prints both reports to the console and skips the email instead of failing the task.
 
-Both scripts run two ways:
+Runs two ways:
 
-- **As a job task** (already wired in): uses the native Spark session on the job's compute — no credentials needed for the DB connection (email still needs the SMTP env vars above).
+- **As the job task** (already wired in): uses the native Spark session on the job's compute — no credentials needed for the DB connection (email still needs the SMTP env vars above).
 - **Standalone** (locally or in CI): uses `databricks-sql-connector` with the same `DATABRICKS_HOST` / `DATABRICKS_HTTP_PATH` / `DATABRICKS_TOKEN` env vars as the rest of this project:
   ```bash
   export DATABRICKS_HOST="dbc-xxxxxxxx-xxxx.cloud.databricks.com"
   export DATABRICKS_HTTP_PATH="/sql/1.0/warehouses/xxxxx"
   export DATABRICKS_TOKEN="dapi..."
   python scripts/check_null_percentage.py
-  python scripts/send_report_email.py --report-type null
+  python scripts/send_report_email.py
   ```
 
-### Data quality: test execution report
-
-Every `dbt build`/`dbt test` run also logs a pass/fail/error summary for **every test that ran** — both generic tests (defined in `_*.yml` files, e.g. `unique`/`not_null`/`relationships`/`accepted_values`) and singular tests (`tests/assert_*.sql`) — to `<catalog>.config.dq_test_results`.
-
-- **`macros/log_test_results.sql`** — a macro run from `on-run-end` in `dbt_project.yml` (right after `on-run-end` logging), using dbt's built-in `results` variable (populated automatically at the end of every invocation with the outcome of everything that ran). It filters to `resource_type == 'test'`, so it captures whatever subset of tests actually ran — including when `dbt_select` narrows a run to specific models.
-- Each row: `test_name`, `test_type` (`generic` or `singular`), `file_path` (which `.yml` or `.sql` file defined it — dbt tracks this natively via `original_file_path`), `model_name` (what it's testing, when determinable), `status` (`pass`/`fail`/`error`/`warn`/`skipped`), `execution_time`, and `message` (the failure detail, if any, truncated to 2000 chars).
-- Same convention as the null-check results table: each run **truncates and replaces** — only the latest run's test results are kept, not history.
-- The logging itself needs no separate job task — it runs as part of the existing `dbt_pipeline_run` task automatically, since it hooks into dbt's own lifecycle.
-
-Query it directly in Databricks SQL, e.g. `SELECT * FROM workspace.config.dq_test_results WHERE status != 'pass'` to see just the failures from the last run.
-
-**Email report** (`send_test_report` job task, `scripts/send_report_email.py --report-type test`) — same shared script as the null report, just pointed at `dq_test_results`: reads whatever's there, shows a pass/fail count summary, and emails an HTML table (color-coded: green = pass, red = fail/error, orange = warn, gray = other) with the same data attached as CSV and PDF. It runs right after `dbt_pipeline_run` (in parallel with the null-check chain, since it only needs the dbt run to have finished, not the null check). Same credential lookup as the null report (env vars → Databricks secret scope) — no separate setup needed if you've already configured `SMTP_USERNAME`/`SMTP_PASSWORD` or the `dq-report` secret scope for that.
-
-In the job YAML, both tasks point `python_file` at the same `scripts/send_report_email.py` and differ only in `spark_python_task.parameters` (`["--report-type", "null"]` vs. `["--report-type", "test"]`). All shared formatting/email code (`get_smtp_credentials`, `send_email`, the CSV/HTML/PDF builders for both report types) lives in `scripts/dq_common.py`.
+All shared formatting/email code (`get_smtp_credentials`, `send_email`, and the CSV/HTML/PDF builders for both report types) lives in `scripts/dq_common.py`.

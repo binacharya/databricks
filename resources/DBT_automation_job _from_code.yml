@@ -30,20 +30,11 @@ resources:
             python_file: ../scripts/check_null_percentage.py
             source: WORKSPACE
           environment_key: python-dq-default
-        - task_key: send_null_report
+        - task_key: send_dq_report
           depends_on:
             - task_key: null_percentage_check
           spark_python_task:
             python_file: ../scripts/send_report_email.py
-            parameters: ["--report-type", "null"]
-            source: WORKSPACE
-          environment_key: python-dq-default
-        - task_key: send_test_report
-          depends_on:
-            - task_key: dbt_pipeline_run
-          spark_python_task:
-            python_file: ../scripts/send_report_email.py
-            parameters: ["--report-type", "test"]
             source: WORKSPACE
           environment_key: python-dq-default
       queue:
